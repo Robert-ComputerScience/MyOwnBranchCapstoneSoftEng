@@ -4,18 +4,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -73,6 +68,22 @@ public class StudyApplication extends Application {
         launcher.setText("Launch");
         root.getChildren().add(launcher);
         launcher.setOnAction(e -> {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("landing-view.fxml"));
+
+            try {
+                Stage landingStage = new Stage();
+                AnchorPane landingRoot = new AnchorPane();
+                landingRoot.getChildren().add(fxmlLoader.load());
+
+                Scene scene = new Scene(landingRoot, 1200, 700);
+                //landingStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+                landingStage.setScene(scene);
+                landingStage.setResizable(false);
+                //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+                stage.close();
+                landingStage.show();
+            } catch(Exception _) { }
         });
 
         /*------------------------------------------System Tray Replacement Buttons------------------------------------------*/
@@ -111,5 +122,38 @@ public class StudyApplication extends Application {
         login.setLayoutY(15);
         login.setOpacity(0);
         root.getChildren().add(login);
+
+        login.setOnAction(e -> {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("login-view.fxml"));
+
+            try {
+                Stage loginStage = new Stage();
+                AnchorPane loginRoot = new AnchorPane();
+                loginRoot.getChildren().add(fxmlLoader.load());
+                loginSetup(loginRoot, loginStage);
+
+                Scene scene = new Scene(loginRoot, 800, 600);
+                //loginStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+                loginStage.setScene(scene);
+                loginStage.setResizable(false);
+                loginStage.initStyle(StageStyle.TRANSPARENT);
+                //loginStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+                loginStage.show();
+            } catch(Exception _) { }
+        });
+
+
     }
+
+    /**
+     * Sets up the interactable parts of the Login page.
+     * @param root  The AnchorPane for the login screen.
+     * @param stage The stage the login scene is set in.
+     * @author Nathaniel Rivera
+     * @since 6/15/2025
+     */
+    public static void loginSetup(AnchorPane root, Stage stage) {
+    }
+
 }
