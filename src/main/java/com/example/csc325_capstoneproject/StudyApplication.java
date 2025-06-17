@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  *
- * @since 6/14/25
+ * @since 6/14/2025
  * @author Nathaniel Rivera
  */
 public class StudyApplication extends Application {
