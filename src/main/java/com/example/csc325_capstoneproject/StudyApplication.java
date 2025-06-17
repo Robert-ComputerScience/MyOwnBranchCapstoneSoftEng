@@ -140,7 +140,9 @@ public class StudyApplication extends Application {
                 loginStage.initStyle(StageStyle.TRANSPARENT);
                 //loginStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
                 loginStage.show();
-            } catch(Exception _) { }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
         });
 
 
