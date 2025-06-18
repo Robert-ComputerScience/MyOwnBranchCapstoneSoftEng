@@ -6,4 +6,4 @@ The Automated Study Application is a group project aimed to help young children 
 
 ### Links
 
-Figma[https://www.figma.com/design/K26YwJ6Rz7k4myM8I8oPzN/Capstone-First-Draft?m=auto&t=Rktjt53h2EZ3IDaQ-1]
+[Figma](https://www.figma.com/design/K26YwJ6Rz7k4myM8I8oPzN/Capstone-First-Draft?m=auto&t=Rktjt53h2EZ3IDaQ-1)
