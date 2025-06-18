@@ -1,4 +1,4 @@
-package com.example.csc325_capstoneproject;
+package com.example.csc325_capstoneproject.model;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class User {
     private final LinkedList<Test> science_tests;
 
     /**
-     * Default Constructor for the User class.
+     * Default constructor for the User class.
      * @since 6/17/2025
      * @author Nathaniel Rivera
      */
@@ -96,7 +96,7 @@ public class User {
     }
 
     /**
-     * Listed Constructor for the User class, creates a User with established test grades.
+     * Listed constructor for the User class, creates a User with established test grades.
      * @param username The username of the User.
      * @param email The email of the User.
      * @param firstName The first name of the User.

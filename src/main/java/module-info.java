@@ -5,4 +5,6 @@ module com.example.csc325_capstoneproject {
 
     opens com.example.csc325_capstoneproject to javafx.fxml;
     exports com.example.csc325_capstoneproject;
+    exports com.example.csc325_capstoneproject.model;
+    opens com.example.csc325_capstoneproject.model to javafx.fxml;
 }
