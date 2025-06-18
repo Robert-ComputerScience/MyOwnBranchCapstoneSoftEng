@@ -1,5 +1,6 @@
 package com.example.csc325_capstoneproject;
 
+import com.example.csc325_capstoneproject.model.Test;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
+import static com.example.csc325_capstoneproject.model.Subject.math;
 
 /**
  *
