@@ -25,7 +25,7 @@ public class StudyApplication extends Application {
     /**
      * The initial start method for the study application. Launches and calls the setup for the splash screen.
      * @param stage The stage in which the splash screen is held
-     * @throws IOException Throws an exception
+     * @throws IOException Throws an exception.
      * @author Nathaniel Rivera
      * @since 6/14/2025
      */
