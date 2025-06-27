@@ -1,6 +1,9 @@
 package com.example.csc325_capstoneproject;
 
+//import com.example.csc325_capstoneproject.model.FirestoreContext;
 import com.example.csc325_capstoneproject.model.Test;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.auth.FirebaseAuth;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,10 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
-
-import static com.example.csc325_capstoneproject.model.Subject.math;
 
 /**
  *
@@ -21,6 +21,11 @@ import static com.example.csc325_capstoneproject.model.Subject.math;
  * @author Nathaniel Rivera
  */
 public class StudyApplication extends Application {
+
+    //public static Firestore fstore;
+    //public static FirebaseAuth fauth;
+    //private final FirestoreContext contxtFirebase = new FirestoreContext();
+
 
     /**
      * The initial start method for the study application. Launches and calls the setup for the splash screen.

@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LoginController {
 
@@ -56,17 +57,18 @@ public class LoginController {
         Stage stage = (Stage) registerButton.getScene().getWindow();
 
         try {
-            Stage landingStage = new Stage();
-            AnchorPane landingRoot = new AnchorPane();
-            landingRoot.getChildren().add(fxmlLoader.load());
+            Stage registerStage = new Stage();
+            AnchorPane registerRoot = new AnchorPane();
+            registerRoot.getChildren().add(fxmlLoader.load());
 
-            Scene scene = new Scene(landingRoot, 680, 350);
-            //landingStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
-            landingStage.setScene(scene);
-            landingStage.setResizable(false);
-            //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+            Scene scene = new Scene(registerRoot, 650, 380);
+            //registerStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+            registerStage.setScene(scene);
+            registerStage.setResizable(false);
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
             stage.close();
-            landingStage.show();
+            registerStage.show();
         } catch(Exception _) { }
     }
 }

@@ -1,6 +1,9 @@
 module com.example.csc325_capstoneproject {
     requires javafx.controls;
     requires javafx.fxml;
+    requires google.cloud.firestore;
+    requires firebase.admin;
+    requires com.google.auth.oauth2;
 
 
     opens com.example.csc325_capstoneproject to javafx.fxml;

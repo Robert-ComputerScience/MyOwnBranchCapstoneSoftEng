@@ -39,26 +39,27 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="emailField" layoutX="329.0" layoutY="139.0" prefHeight="40.0" prefWidth="300.0" promptText="USERNAME">
+      <TextField fx:id="emailField" layoutX="329.0" layoutY="139.0" prefHeight="40.0" prefWidth="300.0" promptText="EMAIL">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="passwordField" layoutX="329.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" promptText="USERNAME">
+      <TextField fx:id="passwordField" layoutX="329.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" promptText="PASSWORD">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="firstNameField" layoutX="329.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="USERNAME">
+      <TextField fx:id="firstNameField" layoutX="329.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="f. NAME">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="lastNameField" layoutX="486.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="USERNAME">
+      <TextField fx:id="lastNameField" layoutX="486.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="l. NAME">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
       <Button layoutX="325.0" layoutY="299.0" mnemonicParsing="false" onAction="#register" prefHeight="48.0" prefWidth="306.0" stylesheets="@registerscreen.css" text="Register" />
+      <Button fx:id="closeButton" layoutX="625.0" layoutY="4.0" mnemonicParsing="false" onAction="#close" prefHeight="26.0" prefWidth="23.0" style="-fx-opacity: 0;" />
     </children>
 </AnchorPane>

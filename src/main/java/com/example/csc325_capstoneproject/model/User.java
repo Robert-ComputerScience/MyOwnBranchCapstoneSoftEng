@@ -35,6 +35,10 @@ public class User {
      * Int that stores the grade level of the User
      */
     private int grade_level;
+    /**
+     * String that stores the UID of the User.
+     */
+    private String uid;
 
     /**
      * LinkedList that stores the previous 10 math tests taken by the User
@@ -65,6 +69,7 @@ public class User {
         this.lastName = "";
         this.password = "";
         this.grade_level = 1;
+        this.uid = "";
         this.math_tests = new LinkedList<>();;
         this.english_tests = new LinkedList<>();;
         this.history_tests = new LinkedList<>();;
@@ -79,16 +84,40 @@ public class User {
      * @param lastName The last name of the User.
      * @param password The password of the User.
      * @param grade_level The grade level of the User.
+     * @param uid The UID of the User
      * @since 6/17/2025
      * @author Nathaniel Rivera
      */
-    public User(String username, String email, String firstName, String lastName, String password, int grade_level) {
+    public User(String username, String email, String firstName, String lastName, String password, int grade_level, String uid) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.grade_level = grade_level;
+        this.uid = uid;
+        this.math_tests = new LinkedList<>();;
+        this.english_tests = new LinkedList<>();;
+        this.history_tests = new LinkedList<>();;
+        this.science_tests = new LinkedList<>();;
+    }
+
+    /**
+     * Parameterized constructor which creates a User with the data stored in Firebase.
+     * @param username The username of the User.
+     * @param email The email of the User.
+     * @param uid The UID of the User
+     * @since 6/27/2025
+     * @author Nathaniel Rivera
+     */
+    public User(String username, String email, String uid) {
+        this.username = username;
+        this.email = email;
+        this.firstName = "";
+        this.lastName = "";
+        this.password = "";
+        this.grade_level = 1;
+        this.uid = uid;
         this.math_tests = new LinkedList<>();;
         this.english_tests = new LinkedList<>();;
         this.history_tests = new LinkedList<>();;
@@ -103,6 +132,7 @@ public class User {
      * @param lastName The last name of the User.
      * @param password The password of the User.
      * @param grade_level The grade level of the User.
+     * @param uid The UID of the User
      * @param math_tests The List of the 10 previous math tests for the User.
      * @param english_tests The List of the 10 previous english tests for the User.
      * @param history_tests The List of the 10 previous history tests for the User.
@@ -110,13 +140,14 @@ public class User {
      * @since 6/17/2025
      * @author Nathaniel Rivera
      */
-    public User(String username, String email, String firstName, String lastName, String password, int grade_level, LinkedList<Test> math_tests, LinkedList<Test> english_tests, LinkedList<Test> history_tests, LinkedList<Test> science_tests) {
+    public User(String username, String email, String firstName, String lastName, String password, int grade_level, String uid, LinkedList<Test> math_tests, LinkedList<Test> english_tests, LinkedList<Test> history_tests, LinkedList<Test> science_tests) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.grade_level = grade_level;
+        this.uid = uid;
         this.math_tests = math_tests;
         this.english_tests = english_tests;
         this.history_tests = history_tests;
@@ -241,6 +272,26 @@ public class User {
      */
     public void setGradeLevel(int grade_level) {
         this.grade_level = grade_level;
+    }
+
+    /**
+     * Getter method for UID.
+     * @return the UID of the User.
+     * @since 6/27/2025
+     * @author Nathaniel Rivera
+     */
+    public String getUID() {
+        return uid;
+    }
+
+    /**
+     * Setter method for UID.
+     * @param uid The UID of the User.
+     * @since 6/27/2025
+     * @author Nathaniel Rivera
+     */
+    public void setUID(String uid) {
+        this.uid = uid;
     }
 
     /**
