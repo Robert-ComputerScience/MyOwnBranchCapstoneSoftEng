@@ -1,6 +1,6 @@
 package com.example.csc325_capstoneproject;
 
-//import com.example.csc325_capstoneproject.model.FirestoreContext;
+import com.example.csc325_capstoneproject.model.FirestoreContext;
 import com.example.csc325_capstoneproject.model.Test;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,9 +22,9 @@ import java.io.IOException;
  */
 public class StudyApplication extends Application {
 
-    //public static Firestore fstore;
-    //public static FirebaseAuth fauth;
-    //private final FirestoreContext contxtFirebase = new FirestoreContext();
+    public static Firestore fstore;
+    public static FirebaseAuth fauth;
+    private final FirestoreContext contxtFirebase = new FirestoreContext();
 
 
     /**
@@ -36,6 +36,9 @@ public class StudyApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        fstore = contxtFirebase.firebase();
+        fauth = FirebaseAuth.getInstance();
+
         FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("splash-view.fxml"));
 
         AnchorPane root = new AnchorPane();
