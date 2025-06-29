@@ -47,7 +47,7 @@ public class RegisterController implements Initializable {
     @FXML
     protected Button closeButton;
 
-    protected LinkedList<User> users;
+    protected LinkedList<User> users = new LinkedList<>();
 
     /**
      * Retrieves the list of Users to make sure the new User has a unique username and email.
@@ -58,7 +58,7 @@ public class RegisterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*
+
         try {
             ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
             for (UserRecord user : page.iterateAll()) {
@@ -67,7 +67,7 @@ public class RegisterController implements Initializable {
             }
         } catch (FirebaseAuthException e) {
             throw new RuntimeException(e);
-        }*/
+        }
 
         /*--------------------------------------------Regex Patterns--------------------------------------------------*/
 
@@ -226,6 +226,7 @@ public class RegisterController implements Initializable {
             canCreate = false;
         }
 
+
         for (User user : users) {
             if (user.getEmail().equals(email) || user.getUsername().equals(username)) {
                 System.out.println("Error: This username or email is already in use");
@@ -238,7 +239,7 @@ public class RegisterController implements Initializable {
 
         if(canCreate) {
             //Firebase section do not uncomment without the key.
-            /*UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+            UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                     .setEmail(emailField.getText())
                     .setEmailVerified(false)
                     .setPassword(passwordField.getText())
@@ -248,7 +249,7 @@ public class RegisterController implements Initializable {
                 StudyApplication.fauth.createUser(request);
             } catch (FirebaseAuthException ex) {
                 //Logger.getLogger(FirestoreContext.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
 
             FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("login-view.fxml"));
 
@@ -271,6 +272,11 @@ public class RegisterController implements Initializable {
         }
     }
 
+    /**
+     * Closes the Register Screen.
+     * @since 6/27/2025
+     * @author Nathaniel Rivera
+     */
     @FXML
     protected void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();

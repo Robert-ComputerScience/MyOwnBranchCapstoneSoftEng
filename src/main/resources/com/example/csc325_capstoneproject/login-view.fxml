@@ -36,14 +36,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userText" layoutX="14.0" layoutY="130.0" onAction="#UserTyped" prefHeight="25.0" prefWidth="266.0" />
-      <Label layoutX="14.0" layoutY="105.0" text="Username" />
-      <TextField fx:id="emailText" layoutX="14.0" layoutY="200.0" onAction="#emailTyped" prefHeight="25.0" prefWidth="266.0" />
+      <TextField fx:id="emailField" layoutX="14.0" layoutY="200.0" prefHeight="25.0" prefWidth="266.0" />
       <Label layoutX="14.0" layoutY="175.0" text="Email" />
       <Label layoutX="15.0" layoutY="245.0" text="Password" />
-      <TextField fx:id="passText" layoutX="14.0" layoutY="270.0" onAction="#passTyped" prefHeight="25.0" prefWidth="266.0" />
-      <Button fx:id="loginButton" layoutX="124.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginPressed" text="Login" />
+      <TextField fx:id="passwordField" layoutX="14.0" layoutY="270.0" prefHeight="25.0" prefWidth="266.0" />
+      <Button fx:id="loginButton" layoutX="124.0" layoutY="330.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="registerButton" layoutX="416.0" layoutY="143.0" mnemonicParsing="false" onAction="#register" text="register" />
+      <Button fx:id="closeButton" layoutX="542.0" layoutY="15.0" mnemonicParsing="false" onAction="#close" text="close" />
    </children>
 </AnchorPane>

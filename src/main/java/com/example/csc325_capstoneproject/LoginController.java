@@ -1,8 +1,14 @@
 package com.example.csc325_capstoneproject;
 
+import com.example.csc325_capstoneproject.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.ListUsersPage;
+import com.google.firebase.auth.UserRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -10,48 +16,105 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class LoginController {
+import java.net.URL;
+import java.util.LinkedList;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
+public class LoginController implements Initializable {
 
     @FXML
-    private Button loginButton;
+    protected Button loginButton;
 
     @FXML
     protected Button registerButton;
 
     @FXML
-    private TextField userText;
+    protected Button closeButton;
 
     @FXML
-    private TextField emailText;
+    protected TextField emailField;
 
     @FXML
-    private TextField passText;
+    protected TextField passwordField;
 
-    String password;
-    String email;
-    String username;
+    protected LinkedList<User> users = new LinkedList<>();
 
+    /**
+     * Retrieves the list of Users to make sure the new User has a unique username and email.
+     * @param url URL.
+     * @param resourceBundle ResourceBundle.
+     * @since 6/27/25
+     * @author Nathaniel Rivera
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
+            for (UserRecord user : page.iterateAll()) {
+                User newUser = new User(user.getDisplayName(), user.getEmail(), user.getUid());
+                users.add(newUser);
+            }
+        } catch (FirebaseAuthException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*--------------------------------------------Regex Patterns--------------------------------------------------*/
+
+        Pattern usernamePattern = Pattern.compile("[\\w|-]{2,25}");
+        Pattern emailPattern = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$");
+        Pattern passwordPattern = Pattern.compile("\\w{2,25}");
+        Pattern namePattern = Pattern.compile("\\w{2,25}+");
+
+        /*------------------------------------------Live Updates to UI------------------------------------------------*/
+
+        // Live border coloring while typing
+        emailField.textProperty().addListener((obs, oldText, newText) -> {
+            boolean valid = emailPattern.matcher(newText).matches();
+            emailField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
+        });
+
+        // Show/hide error message on focus loss
+        emailField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                boolean valid = emailPattern.matcher(emailField.getText()).matches();
+                //emailError.setText(valid ? "" : "Must be a valid email address format");
+                emailField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
+            }
+        });
+
+        // Live border coloring while typing
+        passwordField.textProperty().addListener((obs, oldText, newText) -> {
+            boolean valid = passwordPattern.matcher(newText).matches();
+            passwordField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
+        });
+        // Show/hide error message on focus loss
+        passwordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                boolean valid = passwordPattern.matcher(passwordField.getText()).matches();
+                //passwordError.setText(valid ? "" : "2–25 characters, letters or digits only");
+                passwordField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
+            }
+        });
+    }
 
     @FXML
-    private void loginPressed() {
+    protected void login() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
 
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.close();
     }
 
-
-    public void passTyped(ActionEvent actionEvent) {
-     password = passText.getText();
-    }
-
-    public void emailTyped(ActionEvent actionEvent) {
-        email = emailText.getText();
-    }
-
-    public void UserTyped(ActionEvent actionEvent) {
-      username = userText.getText();
-    }
-
+    /**
+     * Swaps the scene from the Login Screen to the Register Screen.
+     * @since 6/28/2025
+     * @author Nathaniel Rivera
+     */
     @FXML
     protected void register() {
+
         FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("register-view.fxml"));
 
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -70,5 +133,16 @@ public class LoginController {
             stage.close();
             registerStage.show();
         } catch(Exception _) { }
+    }
+
+    /**
+     * Closes the Login Screen
+     * @since 6/28/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void close() {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }
