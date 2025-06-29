@@ -47,7 +47,7 @@ public class RegisterController implements Initializable {
     @FXML
     protected Button closeButton;
 
-    protected LinkedList<User> users;
+    protected LinkedList<User> users = new LinkedList<>();
 
     /**
      * Retrieves the list of Users to make sure the new User has a unique username and email.
@@ -225,6 +225,7 @@ public class RegisterController implements Initializable {
             emailField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
+
 
         for (User user : users) {
             if (user.getEmail().equals(email) || user.getUsername().equals(username)) {

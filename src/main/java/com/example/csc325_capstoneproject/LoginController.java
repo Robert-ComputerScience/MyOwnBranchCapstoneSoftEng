@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
     @FXML
     protected TextField passwordField;
 
-    protected LinkedList<User> users;
+    protected LinkedList<User> users = new LinkedList<>();
 
     /**
      * Retrieves the list of Users to make sure the new User has a unique username and email.
@@ -74,6 +74,7 @@ public class LoginController implements Initializable {
             boolean valid = emailPattern.matcher(newText).matches();
             emailField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
         });
+
         // Show/hide error message on focus loss
         emailField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
