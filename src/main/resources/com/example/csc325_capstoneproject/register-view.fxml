@@ -6,19 +6,48 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csc325_capstoneproject.RegisterController">
     <children>
-        <Rectangle fx:id="regPane" arcHeight="5.0" arcWidth="5.0" fill="#fa6bff" height="380.0" stroke="BLACK" strokeType="INSIDE" width="650.0" />
+        <Rectangle fx:id="regPane" arcHeight="5.0" arcWidth="5.0" height="380.0" stroke="BLACK" strokeType="INSIDE" width="650.0">
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" opacity="0.6259542107582092" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006711409395973154">
+                     <color>
+                        <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" opacity="0.6259542107582092" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill></Rectangle>
+      <ImageView fitHeight="332.0" fitWidth="497.0" layoutX="-142.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@numbers3.png" />
+         </image>
+      </ImageView>
         <Label id="registerText" layoutX="26.0" layoutY="23.0" text="Register Now!" textFill="WHITE">
             <font>
                 <Font name="Berlin Sans FB" size="43.0" />
             </font>
         </Label>
-        <Label id="signText" layoutX="417.0" layoutY="25.0" text="Create an Account" textFill="WHITE">
+        <Label id="signText" layoutX="430.0" layoutY="22.0" text="Create an Account" textFill="WHITE">
             <font>
                 <Font name="Berlin Sans FB" size="16.0" />
             </font>
@@ -28,38 +57,41 @@
                 <Image url="@images/white_close_symbol.png" />
             </image>
         </ImageView>
-        <Label id="signText" layoutX="359.0" layoutY="356.0" text="Already have an account?" textFill="WHITE">
+        <Label id="signText" layoutX="359.0" layoutY="357.0" text="Already have an account?" textFill="WHITE">
             <font>
                 <Font name="Berlin Sans FB" size="16.0" />
             </font>
         </Label>
-        <Line endX="100.0" layoutX="479.0" layoutY="47.0" startX="-100.0" stroke="WHITE" />
-      <TextField fx:id="usernameField" layoutX="330.0" layoutY="75.0" prefHeight="40.0" prefWidth="300.0" promptText="USERNAME">
+        <Line endX="100.0" layoutX="484.0" layoutY="47.0" startX="-100.0" stroke="WHITE" />
+      <TextField fx:id="usernameField" layoutX="334.0" layoutY="70.0" prefHeight="40.0" prefWidth="300.0" promptText="USERNAME">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="emailField" layoutX="329.0" layoutY="139.0" prefHeight="40.0" prefWidth="300.0" promptText="EMAIL">
+      <TextField fx:id="emailField" layoutX="334.0" layoutY="127.0" prefHeight="40.0" prefWidth="300.0" promptText="EMAIL">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="passwordField" layoutX="329.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" promptText="PASSWORD">
+      <TextField fx:id="passwordField" layoutX="334.0" layoutY="184.0" prefHeight="40.0" prefWidth="300.0" promptText="PASSWORD">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="firstNameField" layoutX="329.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="f. NAME">
+      <TextField fx:id="firstNameField" layoutX="334.0" layoutY="241.0" prefHeight="40.0" prefWidth="144.0" promptText="F. NAME">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="lastNameField" layoutX="486.0" layoutY="254.0" prefHeight="40.0" prefWidth="144.0" promptText="l. NAME">
+      <TextField fx:id="lastNameField" layoutX="490.0" layoutY="241.0" prefHeight="40.0" prefWidth="144.0" promptText="L. NAME">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </TextField>
-      <Button layoutX="325.0" layoutY="299.0" mnemonicParsing="false" onAction="#register" prefHeight="48.0" prefWidth="306.0" stylesheets="@registerscreen.css" text="Register" />
+      <Button layoutX="334.0" layoutY="298.0" mnemonicParsing="false" onAction="#register" prefHeight="48.0" prefWidth="306.0" stylesheets="@registerscreen.css" text="Register" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font></Button>
       <Button fx:id="closeButton" layoutX="625.0" layoutY="4.0" mnemonicParsing="false" onAction="#close" prefHeight="26.0" prefWidth="23.0" style="-fx-opacity: 0;" />
     </children>
 </AnchorPane>
