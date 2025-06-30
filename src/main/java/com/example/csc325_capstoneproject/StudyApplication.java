@@ -142,7 +142,6 @@ public class StudyApplication extends Application {
                 Stage loginStage = new Stage();
                 AnchorPane loginRoot = new AnchorPane();
                 loginRoot.getChildren().add(fxmlLoader.load());
-                loginSetup(loginRoot, loginStage);
 
                 Scene scene = new Scene(loginRoot, 800, 600);
                 //loginStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
@@ -158,15 +157,4 @@ public class StudyApplication extends Application {
 
 
     }
-
-    /**
-     * Sets up the interactable parts of the Login page.
-     * @param root  The AnchorPane for the login screen.
-     * @param stage The stage the login scene is set in.
-     * @author Nathaniel Rivera
-     * @since 6/15/2025
-     */
-    public static void loginSetup(AnchorPane root, Stage stage) {
-    }
-
 }

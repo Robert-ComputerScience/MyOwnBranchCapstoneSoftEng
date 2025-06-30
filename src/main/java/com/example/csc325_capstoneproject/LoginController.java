@@ -18,6 +18,7 @@ import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -62,10 +63,8 @@ public class LoginController implements Initializable {
 
         /*--------------------------------------------Regex Patterns--------------------------------------------------*/
 
-        Pattern usernamePattern = Pattern.compile("[\\w|-]{2,25}");
         Pattern emailPattern = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$");
         Pattern passwordPattern = Pattern.compile("\\w{2,25}");
-        Pattern namePattern = Pattern.compile("\\w{2,25}+");
 
         /*------------------------------------------Live Updates to UI------------------------------------------------*/
 
@@ -125,14 +124,13 @@ public class LoginController implements Initializable {
             registerRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(registerRoot, 650, 380);
-            //registerStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
             registerStage.setScene(scene);
             registerStage.setResizable(false);
             registerStage.initStyle(StageStyle.UNDECORATED);
-            //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
             stage.close();
             registerStage.show();
         } catch(Exception _) { }
+
     }
 
     /**
