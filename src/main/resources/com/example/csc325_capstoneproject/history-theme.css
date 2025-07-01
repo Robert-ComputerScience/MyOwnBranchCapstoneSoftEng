@@ -3,7 +3,7 @@
 }
 
 .math-button {
-   -fx-background-color: #6e6eff;
+   -fx-background-color: #ffffff;
 }
 
 .english-button {
@@ -11,9 +11,10 @@
 }
 
 .history-button {
-  -fx-background-color: #ffffff;
+  -fx-background-color: #ffc800;
 }
 
 .science-button {
   -fx-background-color: #ffffff;
 }
+

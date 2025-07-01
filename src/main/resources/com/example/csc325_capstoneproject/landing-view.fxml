@@ -44,8 +44,8 @@
       </TableView>
       <Button fx:id="mathButton" layoutX="32.0" layoutY="207.0" mnemonicParsing="false" onAction="#mathMode" prefHeight="90.0" prefWidth="298.0" styleClass="math-button" text="MATH" />
       <Button fx:id="englishButton" layoutX="32.0" layoutY="329.0" mnemonicParsing="false" onAction="#englishMode" prefHeight="90.0" prefWidth="298.0" styleClass="english-button" text="ENGLISH" />
-      <Button layoutX="32.0" layoutY="450.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="298.0" text="HISTORY" />
-      <Button layoutX="32.0" layoutY="569.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="298.0" text="SCIENCE" />
+      <Button fx:id="historyButton" layoutX="32.0" layoutY="450.0" mnemonicParsing="false" onAction="#historyMode" prefHeight="90.0" prefWidth="298.0" styleClass="history-button" text="HISTORY" />
+      <Button fx:id="scienceButton" layoutX="32.0" layoutY="569.0" mnemonicParsing="false" onAction="#scienceMode" prefHeight="90.0" prefWidth="298.0" styleClass="science-button" text="SCIENCE" />
       <Label layoutX="14.0" layoutY="108.0" text="CHOOSE A SUBJECT TO PRACTICE" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="34.0" />
