@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.auth.UserRecord;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -96,6 +94,7 @@ public class LoginController implements Initializable {
                 passwordField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
+
     }
 
     @FXML
@@ -113,7 +112,6 @@ public class LoginController implements Initializable {
      */
     @FXML
     protected void register() {
-
         FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("register-view.fxml"));
 
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -129,7 +127,10 @@ public class LoginController implements Initializable {
             registerStage.initStyle(StageStyle.UNDECORATED);
             stage.close();
             registerStage.show();
-        } catch(Exception _) { }
+        } catch(Exception ex) {
+            System.out.println("Error");
+            ex.printStackTrace();
+        }
 
     }
 

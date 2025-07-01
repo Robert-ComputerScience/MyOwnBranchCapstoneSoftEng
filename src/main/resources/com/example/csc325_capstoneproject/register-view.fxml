@@ -18,16 +18,21 @@
     <children>
         <Rectangle fx:id="regPane" arcHeight="5.0" arcWidth="5.0" height="380.0" stroke="BLACK" strokeType="INSIDE" width="650.0">
          <fill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+            <RadialGradient centerY="0.0909091198083126" focusDistance="0.018348606354599672" radius="1.0">
                <stops>
                   <Stop>
                      <color>
                         <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" opacity="0.6259542107582092" />
                      </color>
                   </Stop>
-                  <Stop offset="0.006711409395973154">
+                  <Stop offset="0.3539523246045869">
                      <color>
-                        <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" opacity="0.6259542107582092" />
+                        <Color red="0.4263859689235687" green="0.39157894253730774" blue="0.6526315808296204" opacity="0.6299999952316284" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.9647703771788728">
+                     <color>
+                        <Color red="0.5573333501815796" green="0.5199999809265137" blue="0.800000011920929" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -38,14 +43,14 @@
                </stops>
             </RadialGradient>
          </fill></Rectangle>
-      <ImageView fitHeight="332.0" fitWidth="497.0" layoutX="-142.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="332.0" fitWidth="497.0" layoutX="-137.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: .5;">
          <image>
-            <Image url="@numbers3.png" />
+            <Image url="@images/numbers3.png" />
          </image>
       </ImageView>
-        <Label id="registerText" layoutX="26.0" layoutY="23.0" text="Register Now!" textFill="WHITE">
+        <Label id="registerText" layoutX="74.0" layoutY="157.0" text="Register" textFill="WHITE">
             <font>
-                <Font name="Berlin Sans FB" size="43.0" />
+                <Font name="Berlin Sans FB" size="59.0" />
             </font>
         </Label>
         <Label id="signText" layoutX="430.0" layoutY="22.0" text="Create an Account" textFill="WHITE">

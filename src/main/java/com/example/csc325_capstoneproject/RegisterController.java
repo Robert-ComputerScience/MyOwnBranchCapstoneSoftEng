@@ -95,7 +95,7 @@ public class RegisterController implements Initializable {
         Pattern namePattern = Pattern.compile("\\w{2,25}+");
 
         /*------------------------------------------Live Updates to UI------------------------------------------------*/
-
+        /*
         // Live border coloring while typing
         usernameField.textProperty().addListener((obs, oldText, newText) -> {
             boolean valid = usernamePattern.matcher(newText).matches();
@@ -165,6 +165,7 @@ public class RegisterController implements Initializable {
                 lastNameField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
+        */
     }
 
     /**
@@ -211,35 +212,35 @@ public class RegisterController implements Initializable {
 
         if (!userNameMatcher.matches()) {
             System.out.println("Error: Username needs to be within 2-25 characters, no special characters besides '-'");
-            //usernameError.setText("2–25 characters, only letters, digits, or '-' allowed");
+            usernameError.setText("2–25 characters, only letters, digits, or '-' allowed");
             usernameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!passwordMatcher.matches()) {
             System.out.println("Error: Password needs to be within 2-25 characters, no special characters");
-            //passwordError.setText("2–25 characters, letters or digits only");
+            passwordError.setText("2–25 characters, letters or digits only");
             passwordField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!firstNameMatcher.matches()) {
             System.out.println("Error: First name needs to be within 2-25 letters, no other characters");
-            //fNameError.setText("2–25 letters only");
+            fNameError.setText("2–25 letters only");
             firstNameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!lastNameMatcher.matches()) {
             System.out.println("Error: Last name needs to be within 2-25 letters, no other characters");
-            //lNameError.setText("2–25 letters only");
+            lNameError.setText("2–25 letters only");
             lastNameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!emailMatcher.matches()) {
             System.out.println("Error: Invalid email input.  Please use a valid email address");
-            //emailError.setText("Must be a valid email address format");
+            emailError.setText("Must be a valid email address format");
             emailField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
@@ -328,7 +329,9 @@ public class RegisterController implements Initializable {
             //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
             stage.close();
             loginStage.show();
-        } catch(Exception _) { }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 }

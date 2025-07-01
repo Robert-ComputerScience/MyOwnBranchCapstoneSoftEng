@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -87,7 +88,7 @@ public class StudyApplication extends Application {
                 AnchorPane landingRoot = new AnchorPane();
                 landingRoot.getChildren().add(fxmlLoader.load());
 
-                Scene scene = new Scene(landingRoot, 1200, 700);
+                Scene scene = new Scene(landingRoot, 1200, 800);
                 //landingStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
                 landingStage.setScene(scene);
                 landingStage.setResizable(false);
@@ -154,7 +155,5 @@ public class StudyApplication extends Application {
                 ex.printStackTrace();
             }
         });
-
-
     }
 }
