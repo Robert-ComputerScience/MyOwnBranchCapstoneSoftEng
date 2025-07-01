@@ -1,0 +1,11 @@
+.top-bar {
+   -fx-background-color: #e7e5ff;
+}
+
+.math-button {
+   -fx-background-color: #6e6eff;
+}
+
+.english-button {
+  -fx-background-color: #ffffff;
+}

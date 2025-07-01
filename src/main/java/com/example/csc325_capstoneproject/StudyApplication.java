@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  *
@@ -89,7 +90,7 @@ public class StudyApplication extends Application {
                 landingRoot.getChildren().add(fxmlLoader.load());
 
                 Scene scene = new Scene(landingRoot, 1200, 800);
-                //landingStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(StudyApplication.class.getResource("math-theme.css")).toExternalForm());
                 landingStage.setScene(scene);
                 landingStage.setResizable(false);
                 //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));

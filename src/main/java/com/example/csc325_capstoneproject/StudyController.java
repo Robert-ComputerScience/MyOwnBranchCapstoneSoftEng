@@ -4,6 +4,7 @@ import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -68,7 +70,6 @@ public class StudyController implements Initializable {
         Test test = new Test(Subject.math, 20, 10, "6/30/2025");
         math_tests.add(test);
 
-        System.out.println("tested");
         tv_subject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         tv_date.setCellValueFactory(new PropertyValueFactory<>("DateTaken"));
         tv_score.setCellValueFactory(new PropertyValueFactory<>("Score"));
@@ -87,9 +88,19 @@ public class StudyController implements Initializable {
         tv.setItems(math_tests);
         currentSubject = Subject.math;
 
-        Scene scene = mathButton.getScene();
-        scene.getStylesheets().removeAll();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("math-landingscreen.css")).toExternalForm());
+        try {
+            Scene scene = mathButton.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            stage.getScene().getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("math-theme.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("math " + scene.getStylesheets());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -102,9 +113,20 @@ public class StudyController implements Initializable {
         tv.setItems(math_tests);
         currentSubject = Subject.english;
 
-        Scene scene = englishButton.getScene();
-        scene.getStylesheets().removeAll();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("english-landingscreen.css")).toExternalForm());
+        try {
+            Scene scene = englishButton.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            stage.getScene().getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("english-theme.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("english " + scene.getStylesheets());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
