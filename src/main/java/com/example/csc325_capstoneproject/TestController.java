@@ -74,8 +74,15 @@ public class TestController implements Initializable {
         numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
         previousButton.setDisable(true);
 
-        questions = new ArrayList<>(totalQuestions);
-        answers = new ArrayList<>(totalQuestions);
+        questions = new ArrayList<>();
+        for(int i = 0; i < totalQuestions; i++) {
+            questions.add(i, "");
+        }
+
+        answers = new ArrayList<>();
+        for(int i = 0; i < totalQuestions; i++) {
+            answers.add(i, "");
+        }
     }
 
     /**
@@ -86,7 +93,7 @@ public class TestController implements Initializable {
     @FXML
     protected void next() {
 
-        //answers.set(currentQuestion - 1, answerField.getText());
+        answers.set(currentQuestion - 1, answerField.getText());
 
         currentQuestion++;
         numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
@@ -108,7 +115,7 @@ public class TestController implements Initializable {
     @FXML
     protected void previous() {
 
-        //answers.set(currentQuestion - 1, answerField.getText());
+        answers.set(currentQuestion - 1, answerField.getText());
 
         currentQuestion--;
         numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
