@@ -10,12 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -33,19 +33,37 @@ public class RegisterController implements Initializable {
     protected TextField usernameField;
 
     @FXML
+    protected Label usernameError;
+
+    @FXML
     protected TextField emailField;
+
+    @FXML
+    protected Label emailError;
 
     @FXML
     protected TextField passwordField;
 
     @FXML
+    protected Label passwordError;
+
+    @FXML
     protected TextField firstNameField;
+
+    @FXML
+    protected Label fNameError;
 
     @FXML
     protected TextField lastNameField;
 
     @FXML
+    protected Label lNameError;
+
+    @FXML
     protected Button closeButton;
+
+    @FXML
+    protected Button loginButton;
 
     protected LinkedList<User> users = new LinkedList<>();
 
@@ -77,7 +95,7 @@ public class RegisterController implements Initializable {
         Pattern namePattern = Pattern.compile("\\w{2,25}+");
 
         /*------------------------------------------Live Updates to UI------------------------------------------------*/
-
+        /*
         // Live border coloring while typing
         usernameField.textProperty().addListener((obs, oldText, newText) -> {
             boolean valid = usernamePattern.matcher(newText).matches();
@@ -87,7 +105,7 @@ public class RegisterController implements Initializable {
         usernameField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 boolean valid = usernamePattern.matcher(usernameField.getText()).matches();
-                //usernameError.setText(valid ? "" : "2–25 characters, only letters, digits, or '-' allowed");
+                usernameError.setText(valid ? "" : "2–25 characters, only letters, digits, or '-' allowed");
                 usernameField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
@@ -101,7 +119,7 @@ public class RegisterController implements Initializable {
         emailField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 boolean valid = emailPattern.matcher(emailField.getText()).matches();
-                //emailError.setText(valid ? "" : "Must be a valid email address format");
+                emailError.setText(valid ? "" : "Must be a valid email address format");
                 emailField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
@@ -115,7 +133,7 @@ public class RegisterController implements Initializable {
         passwordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 boolean valid = passwordPattern.matcher(passwordField.getText()).matches();
-                //passwordError.setText(valid ? "" : "2–25 characters, letters or digits only");
+                passwordError.setText(valid ? "" : "2–25 characters, letters or digits only");
                 passwordField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
@@ -129,7 +147,7 @@ public class RegisterController implements Initializable {
         firstNameField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 boolean valid = namePattern.matcher(firstNameField.getText()).matches();
-                //fNameError.setText(valid ? "" : "2–25 letters only");
+                fNameError.setText(valid ? "" : "2–25 letters only");
                 firstNameField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
@@ -143,10 +161,11 @@ public class RegisterController implements Initializable {
         lastNameField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 boolean valid = namePattern.matcher(lastNameField.getText()).matches();
-                //lNameError.setText(valid ? "" : "2–25 letters only");
+                lNameError.setText(valid ? "" : "2–25 letters only");
                 lastNameField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
+        */
     }
 
     /**
@@ -193,35 +212,35 @@ public class RegisterController implements Initializable {
 
         if (!userNameMatcher.matches()) {
             System.out.println("Error: Username needs to be within 2-25 characters, no special characters besides '-'");
-            //usernameError.setText("2–25 characters, only letters, digits, or '-' allowed");
+            usernameError.setText("2–25 characters, only letters, digits, or '-' allowed");
             usernameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!passwordMatcher.matches()) {
             System.out.println("Error: Password needs to be within 2-25 characters, no special characters");
-            //passwordError.setText("2–25 characters, letters or digits only");
+            passwordError.setText("2–25 characters, letters or digits only");
             passwordField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!firstNameMatcher.matches()) {
             System.out.println("Error: First name needs to be within 2-25 letters, no other characters");
-            //fNameError.setText("2–25 letters only");
+            fNameError.setText("2–25 letters only");
             firstNameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!lastNameMatcher.matches()) {
             System.out.println("Error: Last name needs to be within 2-25 letters, no other characters");
-            //lNameError.setText("2–25 letters only");
+            lNameError.setText("2–25 letters only");
             lastNameField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
 
         if (!emailMatcher.matches()) {
             System.out.println("Error: Invalid email input.  Please use a valid email address");
-            //emailError.setText("Must be a valid email address format");
+            emailError.setText("Must be a valid email address format");
             emailField.setStyle("-fx-border-color: red;");
             canCreate = false;
         }
@@ -253,18 +272,20 @@ public class RegisterController implements Initializable {
 
             FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("login-view.fxml"));
 
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+
             try {
                 Stage loginStage = new Stage();
                 AnchorPane loginRoot = new AnchorPane();
                 loginRoot.getChildren().add(fxmlLoader.load());
-                StudyApplication.loginSetup(loginRoot, loginStage);
 
-                Scene scene = new Scene(loginRoot, 800, 600);
-                //loginStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+                Scene scene = new Scene(loginRoot, 650, 380);
+                //registerStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
                 loginStage.setScene(scene);
                 loginStage.setResizable(false);
-                loginStage.initStyle(StageStyle.TRANSPARENT);
-                //loginStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+                loginStage.initStyle(StageStyle.UNDECORATED);
+                //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+                stage.close();
                 loginStage.show();
             } catch(Exception ex) {
                 ex.printStackTrace();
@@ -281,5 +302,36 @@ public class RegisterController implements Initializable {
     protected void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Swaps the scene from the Register Screen to the Login Screen.
+     * @since 6/29/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void login() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("login-view.fxml"));
+
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+
+        try {
+            Stage loginStage = new Stage();
+            AnchorPane loginRoot = new AnchorPane();
+            loginRoot.getChildren().add(fxmlLoader.load());
+
+            Scene scene = new Scene(loginRoot, 650, 380);
+            //registerStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+            loginStage.setScene(scene);
+            loginStage.setResizable(false);
+            loginStage.initStyle(StageStyle.UNDECORATED);
+            //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+            stage.close();
+            loginStage.show();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

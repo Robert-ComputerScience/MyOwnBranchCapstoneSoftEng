@@ -7,8 +7,8 @@ package com.example.csc325_capstoneproject.model;
  * @author Nathaniel Rivera
  */
 public enum Subject {
-    math,
-    english,
-    history,
-    science
+    MATH,
+    ENGLISH,
+    HISTORY,
+    SCIENCE
 }

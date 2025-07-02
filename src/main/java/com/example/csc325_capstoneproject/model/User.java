@@ -393,4 +393,76 @@ public class User {
             science_tests.poll();
         }
     }
+
+    /**
+     * Calculates and returns the average of the users math tests
+     * @return The average of the Users math tests.
+     * @since 6/30/2025
+     * @author Nathaniel Rivera
+     */
+    public double calculateMathAverage() {
+        double total = 0;
+
+        for (Test test : math_tests) {
+            total += test.getScore();
+        }
+
+        total /= math_tests.size();
+        total = (double) ((int) (total * 100)) /100;
+        return total;
+    }
+
+    /**
+     * Calculates and returns the average of the users english tests
+     * @return The average of the Users english tests.
+     * @since 6/30/2025
+     * @author Nathaniel Rivera
+     */
+    public double calculateEnglishAverage() {
+        double total = 0;
+
+        for (Test test : english_tests) {
+            total += test.getScore();
+        }
+
+        total /= english_tests.size();
+        total = (double) ((int) (total * 100)) /100;
+        return total;
+    }
+
+    /**
+     * Calculates and returns the average of the users history tests
+     * @return The average of the Users math tests.
+     * @since 6/30/2025
+     * @author Nathaniel Rivera
+     */
+    public double calculateHistoryAverage() {
+        double total = 0;
+
+        for (Test test : history_tests) {
+            total += test.getScore();
+        }
+
+        total /= history_tests.size();
+        total = (double) ((int) (total * 100)) /100;
+        return total;
+    }
+
+    /**
+     * Calculates and returns the average of the users science tests
+     * @return The average of the Users math tests.
+     * @since 6/30/2025
+     * @author Nathaniel Rivera
+     */
+    public double calculateScienceAverage() {
+        double total = 0;
+
+        for (Test test : science_tests) {
+            total += test.getScore();
+        }
+
+        total /= science_tests.size();
+        total = (double) ((int) (total * 100)) /100;
+        return total;
+    }
 }   

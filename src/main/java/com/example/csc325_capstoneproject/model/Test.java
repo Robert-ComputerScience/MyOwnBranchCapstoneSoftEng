@@ -22,6 +22,10 @@ public class Test {
      * A string storing the date the test was taken by the user.
      */
     private String date_taken;
+    /**
+     * A double storing the score of the test.
+     */
+    private final double score;
 
     /**
      * Default constructor for the Test class.
@@ -33,6 +37,7 @@ public class Test {
         this.question_count = 0;
         this.num_correct = 0;
         this.date_taken = "N/A";
+        this.score = 0;
     }
 
     /**
@@ -49,6 +54,7 @@ public class Test {
         this.question_count = question_count;
         this.num_correct = num_correct;
         this.date_taken = date_taken;
+        this.score = getScore();
     }
 
     /**
@@ -136,9 +142,9 @@ public class Test {
      * The String returned will have at most one decimal place.
      * @return The score of the test in the form of a string.
      */
-    public String getScore() {
+    public double getScore() {
         double percent = ((double) num_correct / (double) question_count) * 100;
         percent = (double) ((int) (percent * 100)) /100;
-        return percent + "%";
+        return percent;
     }
 }

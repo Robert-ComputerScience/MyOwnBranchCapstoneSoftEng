@@ -8,12 +8,14 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  *
@@ -87,8 +89,8 @@ public class StudyApplication extends Application {
                 AnchorPane landingRoot = new AnchorPane();
                 landingRoot.getChildren().add(fxmlLoader.load());
 
-                Scene scene = new Scene(landingRoot, 1200, 700);
-                //landingStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+                Scene scene = new Scene(landingRoot, 1200, 800);
+                scene.getStylesheets().add(Objects.requireNonNull(StudyApplication.class.getResource("math-theme.css")).toExternalForm());
                 landingStage.setScene(scene);
                 landingStage.setResizable(false);
                 //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
@@ -142,7 +144,6 @@ public class StudyApplication extends Application {
                 Stage loginStage = new Stage();
                 AnchorPane loginRoot = new AnchorPane();
                 loginRoot.getChildren().add(fxmlLoader.load());
-                loginSetup(loginRoot, loginStage);
 
                 Scene scene = new Scene(loginRoot, 800, 600);
                 //loginStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
@@ -155,18 +156,5 @@ public class StudyApplication extends Application {
                 ex.printStackTrace();
             }
         });
-
-
     }
-
-    /**
-     * Sets up the interactable parts of the Login page.
-     * @param root  The AnchorPane for the login screen.
-     * @param stage The stage the login scene is set in.
-     * @author Nathaniel Rivera
-     * @since 6/15/2025
-     */
-    public static void loginSetup(AnchorPane root, Stage stage) {
-    }
-
 }

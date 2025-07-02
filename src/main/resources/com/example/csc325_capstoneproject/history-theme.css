@@ -1,0 +1,20 @@
+.top-bar {
+   -fx-background-color: #e7e5ff;
+}
+
+.math-button {
+   -fx-background-color: #ffffff;
+}
+
+.english-button {
+  -fx-background-color: #ffffff;
+}
+
+.history-button {
+  -fx-background-color: #ffc800;
+}
+
+.science-button {
+  -fx-background-color: #ffffff;
+}
+

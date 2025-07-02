@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.auth.UserRecord;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -62,10 +61,8 @@ public class LoginController implements Initializable {
 
         /*--------------------------------------------Regex Patterns--------------------------------------------------*/
 
-        Pattern usernamePattern = Pattern.compile("[\\w|-]{2,25}");
         Pattern emailPattern = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$");
         Pattern passwordPattern = Pattern.compile("\\w{2,25}");
-        Pattern namePattern = Pattern.compile("\\w{2,25}+");
 
         /*------------------------------------------Live Updates to UI------------------------------------------------*/
 
@@ -97,6 +94,7 @@ public class LoginController implements Initializable {
                 passwordField.setStyle(valid ? "-fx-border-color: Lime;" : "-fx-border-color: red;");
             }
         });
+
     }
 
     @FXML
@@ -114,7 +112,6 @@ public class LoginController implements Initializable {
      */
     @FXML
     protected void register() {
-
         FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("register-view.fxml"));
 
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -125,14 +122,16 @@ public class LoginController implements Initializable {
             registerRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(registerRoot, 650, 380);
-            //registerStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
             registerStage.setScene(scene);
             registerStage.setResizable(false);
             registerStage.initStyle(StageStyle.UNDECORATED);
-            //registerStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
             stage.close();
             registerStage.show();
-        } catch(Exception _) { }
+        } catch(Exception ex) {
+            System.out.println("Error");
+            ex.printStackTrace();
+        }
+
     }
 
     /**
