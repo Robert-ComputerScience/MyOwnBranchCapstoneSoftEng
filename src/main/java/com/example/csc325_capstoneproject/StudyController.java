@@ -4,24 +4,23 @@ import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -47,6 +46,12 @@ public class StudyController implements Initializable {
     protected Button scienceButton;
 
     @FXML
+    protected Button praticeButton;
+
+    @FXML
+    protected Button testButton;
+
+    @FXML
     protected TableView<Test> tv;
 
     @FXML
@@ -58,9 +63,13 @@ public class StudyController implements Initializable {
     @FXML
     protected TableColumn<Test, Integer> tv_count;
 
-    protected Subject currentSubject;
+    public static Subject currentSubject;
 
-    protected int currentGradeLevel;
+    public static int currentGradeLevel;
+
+    public static int questionCount;
+
+    public static boolean isTimed;
 
     protected ObservableList<Test> math_tests = FXCollections.observableList(new LinkedList<>());
 
@@ -79,7 +88,12 @@ public class StudyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Test test = new Test(Subject.math, 20, 10, "6/30/2025");
+
+        currentSubject = Subject.MATH;
+        currentGradeLevel = 1;
+        questionCount = 10;
+
+        Test test = new Test(Subject.MATH, 20, 10, "6/30/2025");
         math_tests.add(test);
 
         tv_subject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
@@ -98,7 +112,7 @@ public class StudyController implements Initializable {
     @FXML
     protected void mathMode() {
         tv.setItems(math_tests);
-        currentSubject = Subject.math;
+        currentSubject = Subject.MATH;
 
         try {
 
@@ -122,7 +136,7 @@ public class StudyController implements Initializable {
     @FXML
     protected void englishMode() {
         tv.setItems(english_tests);
-        currentSubject = Subject.english;
+        currentSubject = Subject.ENGLISH;
 
         try {
 
@@ -147,7 +161,7 @@ public class StudyController implements Initializable {
     @FXML
     protected void historyMode() {
         tv.setItems(history_tests);
-        currentSubject = Subject.history;
+        currentSubject = Subject.HISTORY;
 
         try {
             Scene scene = historyButton.getScene();
@@ -171,7 +185,7 @@ public class StudyController implements Initializable {
     @FXML
     protected void scienceMode() {
         tv.setItems(science_tests);
-        currentSubject = Subject.science;
+        currentSubject = Subject.SCIENCE;
 
         try {
             Scene scene = scienceButton.getScene();
@@ -203,5 +217,101 @@ public class StudyController implements Initializable {
 
     }
 
+    /**
+     * Method to set the variables for the test on the TestController screen for currentSubject
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    public static Subject getCurrentSubject() {
+        return currentSubject;
+    }
 
+    /**
+     * Method to set the variables for the test on the TestController screen for currentGradeLevel
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    public static int getCurrentGradeLevel() {
+        return currentGradeLevel;
+    }
+
+    /**
+     * Method to set the variables for the test on the TestController screen for questionCount
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    public static int getQuestionCount() {
+        return questionCount;
+    }
+
+    /**
+     * Method to set the variables for the test on the TestController screen for isTimed.
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    public static boolean getTimed() {
+        return isTimed;
+    }
+
+    /**
+     * Swaps the screen to  a practice test without a timer
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void practiceTest() {
+
+        isTimed = false;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("test-view.fxml"));
+
+        Stage stage = (Stage) testButton.getScene().getWindow();
+
+        try {
+            Stage testStage = new Stage();
+            AnchorPane testRoot = new AnchorPane();
+            testRoot.getChildren().add(fxmlLoader.load());
+
+            Scene scene = new Scene(testRoot, 1200, 700);
+            //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+            testStage.setScene(scene);
+            testStage.setResizable(false);
+            //testStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+            stage.close();
+            testStage.show();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Swaps the screen to a test with a timer
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void test() {
+
+        isTimed = true;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("test-view.fxml"));
+
+        Stage stage = (Stage) testButton.getScene().getWindow();
+
+        try {
+            Stage testStage = new Stage();
+            AnchorPane testRoot = new AnchorPane();
+            testRoot.getChildren().add(fxmlLoader.load());
+
+            Scene scene = new Scene(testRoot, 1200, 700);
+            //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+            testStage.setScene(scene);
+            testStage.setResizable(false);
+            //testStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+            stage.close();
+            testStage.show();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

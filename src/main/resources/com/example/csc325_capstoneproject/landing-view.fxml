@@ -57,8 +57,8 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="72.0" layoutX="685.0" layoutY="462.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="514.0" />
-      <Button layoutX="26.0" layoutY="707.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="210.0" text="PRACTICE" />
-      <Button layoutX="445.0" layoutY="707.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="210.0" text="TEST" />
+      <Button fx:id="praticeButton" layoutX="26.0" layoutY="707.0" mnemonicParsing="false" onAction="#practiceTest" prefHeight="72.0" prefWidth="210.0" text="PRACTICE" />
+      <Button fx:id="testButton" layoutX="445.0" layoutY="707.0" mnemonicParsing="false" onAction="#test" prefHeight="72.0" prefWidth="210.0" text="TEST" />
       <Label layoutX="828.0" layoutY="130.0" text="Your average grade on the past 10 math tests" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="12.0" />
