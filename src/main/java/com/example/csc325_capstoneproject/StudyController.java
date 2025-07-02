@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -63,6 +64,12 @@ public class StudyController implements Initializable {
     @FXML
     protected TableColumn<Test, Integer> tv_count;
 
+    @FXML
+    protected ComboBox<Integer> gradeLevelBox;
+
+    @FXML
+    protected ComboBox<Integer> questionNumberBox;
+
     public static Subject currentSubject;
 
     public static int currentGradeLevel;
@@ -88,6 +95,9 @@ public class StudyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        gradeLevelBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
+        questionNumberBox.setItems(FXCollections.observableArrayList(10, 15, 20));
 
         currentSubject = Subject.MATH;
         currentGradeLevel = 1;
@@ -313,5 +323,25 @@ public class StudyController implements Initializable {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * Updates the grade level of the User
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void gradeLevelUpdate() {
+        currentGradeLevel = gradeLevelBox.getValue();
+    }
+
+    /**
+     * Updates the question count for the test
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void questionCountUpdate() {
+        questionCount = questionNumberBox.getValue();
     }
 }

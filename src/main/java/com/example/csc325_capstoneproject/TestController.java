@@ -72,6 +72,7 @@ public class TestController implements Initializable {
         subjectLabel.setText("Subject: " + subject);
         gradeLabel.setText("Grade: " + gradeLevel);
         numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
+        previousButton.setDisable(true);
 
         questions = new ArrayList<>(totalQuestions);
         answers = new ArrayList<>(totalQuestions);
@@ -84,7 +85,19 @@ public class TestController implements Initializable {
      */
     @FXML
     protected void next() {
+
+        //answers.set(currentQuestion - 1, answerField.getText());
+
         currentQuestion++;
+        numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
+
+        if(currentQuestion == totalQuestions) {
+            nextButton.setDisable(true);
+        }
+
+        if(currentQuestion != 1 && previousButton.isDisable()) {
+            previousButton.setDisable(false);
+        }
     }
 
     /**
@@ -94,7 +107,19 @@ public class TestController implements Initializable {
      */
     @FXML
     protected void previous() {
+
+        //answers.set(currentQuestion - 1, answerField.getText());
+
         currentQuestion--;
+        numQuestionsLabel.setText("Question " + currentQuestion + " of " + totalQuestions);
+
+        if(currentQuestion != totalQuestions && nextButton.isDisable()) {
+            nextButton.setDisable(false);
+        }
+
+        if(currentQuestion == 1) {
+            previousButton.setDisable(true);
+        }
     }
 
     /**
@@ -103,5 +128,7 @@ public class TestController implements Initializable {
      * @author Nathaniel Rivera
      */
     @FXML
-    protected void submit() {}
+    protected void submit() {
+
+    }
 }
