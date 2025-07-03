@@ -3,15 +3,18 @@ package com.example.csc325_capstoneproject;
 import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TestController implements Initializable {
 
@@ -83,6 +86,33 @@ public class TestController implements Initializable {
         for(int i = 0; i < totalQuestions; i++) {
             answers.add(i, "");
         }
+
+        if(isTimed) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    System.out.println("Times out");
+                    /*
+                    FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("landing-view.fxml"));
+
+                    Stage stage = (Stage) submitButton.getScene().getWindow();
+
+                    try {
+                        Stage landingStage = new Stage();
+                        AnchorPane landingRoot = new AnchorPane();
+                        landingRoot.getChildren().add(fxmlLoader.load());
+
+                        Scene scene = new Scene(landingRoot, 1200, 800);
+                        scene.getStylesheets().add(Objects.requireNonNull(StudyApplication.class.getResource("math-theme.css")).toExternalForm());
+                        landingStage.setScene(scene);
+                        landingStage.setResizable(false);
+                        //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+                        stage.close();
+                        landingStage.show();
+                    } catch(Exception _) { }*/
+                }
+            }, 5000);
+        }
     }
 
     /**
@@ -136,6 +166,22 @@ public class TestController implements Initializable {
      */
     @FXML
     protected void submit() {
+        FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("landing-view.fxml"));
 
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+
+        try {
+            Stage landingStage = new Stage();
+            AnchorPane landingRoot = new AnchorPane();
+            landingRoot.getChildren().add(fxmlLoader.load());
+
+            Scene scene = new Scene(landingRoot, 1200, 800);
+            scene.getStylesheets().add(Objects.requireNonNull(StudyApplication.class.getResource("math-theme.css")).toExternalForm());
+            landingStage.setScene(scene);
+            landingStage.setResizable(false);
+            //landingStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
+            stage.close();
+            landingStage.show();
+        } catch(Exception _) { }
     }
 }

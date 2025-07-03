@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -283,7 +284,14 @@ public class StudyController implements Initializable {
             testRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(testRoot, 1200, 700);
-            //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+
+            switch(currentSubject) {
+                case MATH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("math-test.css")).toExternalForm());
+                case ENGLISH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("english-test.css")).toExternalForm());
+                case HISTORY -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("history-test.css")).toExternalForm());
+                case SCIENCE -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("science-test.css")).toExternalForm());
+            }
+
             testStage.setScene(scene);
             testStage.setResizable(false);
             //testStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
@@ -314,6 +322,12 @@ public class StudyController implements Initializable {
             testRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(testRoot, 1200, 700);
+            switch(currentSubject) {
+                case MATH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("math-test.css")).toExternalForm());
+                case ENGLISH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("english-test.css")).toExternalForm());
+                case HISTORY -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("history-test.css")).toExternalForm());
+                case SCIENCE -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("science-test.css")).toExternalForm());
+            }
             //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
             testStage.setScene(scene);
             testStage.setResizable(false);
