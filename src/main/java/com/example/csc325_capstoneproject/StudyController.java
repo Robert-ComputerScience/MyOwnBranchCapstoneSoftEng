@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -63,6 +65,12 @@ public class StudyController implements Initializable {
     @FXML
     protected TableColumn<Test, Integer> tv_count;
 
+    @FXML
+    protected ComboBox<Integer> gradeLevelBox;
+
+    @FXML
+    protected ComboBox<Integer> questionNumberBox;
+
     public static Subject currentSubject;
 
     public static int currentGradeLevel;
@@ -88,6 +96,9 @@ public class StudyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        gradeLevelBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
+        questionNumberBox.setItems(FXCollections.observableArrayList(10, 15, 20));
 
         currentSubject = Subject.MATH;
         currentGradeLevel = 1;
@@ -273,7 +284,14 @@ public class StudyController implements Initializable {
             testRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(testRoot, 1200, 700);
-            //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
+
+            switch(currentSubject) {
+                case MATH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("math-test.css")).toExternalForm());
+                case ENGLISH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("english-test.css")).toExternalForm());
+                case HISTORY -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("history-test.css")).toExternalForm());
+                case SCIENCE -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("science-test.css")).toExternalForm());
+            }
+
             testStage.setScene(scene);
             testStage.setResizable(false);
             //testStage.getIcons().add(new Image(Objects.requireNonNull(StudyApplication.class.getResourceAsStream())));
@@ -304,6 +322,12 @@ public class StudyController implements Initializable {
             testRoot.getChildren().add(fxmlLoader.load());
 
             Scene scene = new Scene(testRoot, 1200, 700);
+            switch(currentSubject) {
+                case MATH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("math-test.css")).toExternalForm());
+                case ENGLISH -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("english-test.css")).toExternalForm());
+                case HISTORY -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("history-test.css")).toExternalForm());
+                case SCIENCE -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("science-test.css")).toExternalForm());
+            }
             //testStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
             testStage.setScene(scene);
             testStage.setResizable(false);
@@ -313,5 +337,25 @@ public class StudyController implements Initializable {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * Updates the grade level of the User
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void gradeLevelUpdate() {
+        currentGradeLevel = gradeLevelBox.getValue();
+    }
+
+    /**
+     * Updates the question count for the test
+     * @since 7/2/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void questionCountUpdate() {
+        questionCount = questionNumberBox.getValue();
     }
 }
