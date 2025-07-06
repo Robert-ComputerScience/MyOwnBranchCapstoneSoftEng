@@ -33,8 +33,8 @@
       <Button fx:id="settings" layoutX="1160.0" layoutY="5.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0" text="..." />
       <ComboBox fx:id="gradeLevelBox" layoutX="237.0" layoutY="38.0" onAction="#gradeLevelUpdate" prefHeight="26.0" prefWidth="38.0" />
       <Button fx:id="profile_button" layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#changePFP" prefHeight="90.0" prefWidth="90.0" style="-fx-opacity: 0;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="700.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="685.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="363.0" layoutX="685.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="514.0" />
+      <Rectangle id="subjectrect" arcHeight="5.0" arcWidth="5.0" height="700.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="color-rectangle" width="685.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="363.0" layoutX="685.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="box1" width="514.0" />
       <TableView fx:id="tv" layoutX="686.0" layoutY="538.0" prefHeight="261.0" prefWidth="514.0">
         <columns>
           <TableColumn fx:id="tv_date" prefWidth="187.199951171875" text="Date Taken" />
@@ -43,10 +43,22 @@
             <TableColumn fx:id="tv_count" minWidth="0.0" prefWidth="133.5999755859375" text="Question Count" />
         </columns>
       </TableView>
-      <Button fx:id="mathButton" layoutX="32.0" layoutY="207.0" mnemonicParsing="false" onAction="#mathMode" prefHeight="90.0" prefWidth="298.0" styleClass="math-button" text="MATH" />
-      <Button fx:id="englishButton" layoutX="32.0" layoutY="329.0" mnemonicParsing="false" onAction="#englishMode" prefHeight="90.0" prefWidth="298.0" styleClass="english-button" text="ENGLISH" />
-      <Button fx:id="historyButton" layoutX="32.0" layoutY="450.0" mnemonicParsing="false" onAction="#historyMode" prefHeight="90.0" prefWidth="298.0" styleClass="history-button" text="HISTORY" />
-      <Button fx:id="scienceButton" layoutX="32.0" layoutY="569.0" mnemonicParsing="false" onAction="#scienceMode" prefHeight="90.0" prefWidth="298.0" styleClass="science-button" text="SCIENCE" />
+      <Button fx:id="mathButton" layoutX="32.0" layoutY="207.0" mnemonicParsing="false" onAction="#mathMode" prefHeight="90.0" prefWidth="298.0" styleClass="math-button" text="MATH">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font></Button>
+      <Button fx:id="englishButton" layoutX="32.0" layoutY="329.0" mnemonicParsing="false" onAction="#englishMode" prefHeight="90.0" prefWidth="298.0" styleClass="english-button" text="ENGLISH">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font></Button>
+      <Button fx:id="historyButton" layoutX="32.0" layoutY="450.0" mnemonicParsing="false" onAction="#historyMode" prefHeight="90.0" prefWidth="298.0" styleClass="history-button" text="HISTORY">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font></Button>
+      <Button fx:id="scienceButton" layoutX="32.0" layoutY="569.0" mnemonicParsing="false" onAction="#scienceMode" prefHeight="90.0" prefWidth="298.0" styleClass="science-button" text="SCIENCE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font></Button>
       <Label layoutX="14.0" layoutY="108.0" text="CHOOSE A SUBJECT TO PRACTICE" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="34.0" />
@@ -57,10 +69,18 @@
             <Font name="Bodoni MT" size="34.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="72.0" layoutX="685.0" layoutY="462.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="514.0" />
-      <Button fx:id="praticeButton" layoutX="26.0" layoutY="707.0" mnemonicParsing="false" onAction="#practiceTest" prefHeight="72.0" prefWidth="210.0" text="PRACTICE" />
-      <Button fx:id="testButton" layoutX="445.0" layoutY="707.0" mnemonicParsing="false" onAction="#test" prefHeight="72.0" prefWidth="210.0" text="TEST" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="72.0" layoutX="685.0" layoutY="462.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="box2" width="514.0" />
+      <Button fx:id="praticeButton" layoutX="26.0" layoutY="707.0" mnemonicParsing="false" onAction="#practiceTest" prefHeight="72.0" prefWidth="210.0" styleClass="Landing-buttons" text="PRACTICE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font></Button>
+      <Button fx:id="testButton" layoutX="445.0" layoutY="707.0" mnemonicParsing="false" onAction="#test" prefHeight="72.0" prefWidth="210.0" styleClass="Landing-buttons" text="TEST">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font></Button>
+  
       <Label fx:id="averageGradeLabel" layoutX="741.0" layoutY="128.0" text="Your average grade on the past 10 math tests" textFill="WHITE">
+
          <font>
             <Font name="Bodoni MT" size="22.0" />
          </font>

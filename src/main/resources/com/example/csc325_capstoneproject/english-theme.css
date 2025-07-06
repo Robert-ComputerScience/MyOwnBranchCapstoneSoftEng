@@ -1,19 +1,60 @@
 .top-bar {
-  -fx-background-color: #ff5959;
+  -fx-background-color: #e7e5ff;
 }
 
 .math-button {
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
   -fx-background-color: #ffffff;
+  -fx-text-fill: #6e6eff;
+}
+.math-button:hover {
+  -fx-background-color: #6e6eff;
+  -fx-text-fill: #ffffff;
 }
 
 .english-button {
-  -fx-background-color: #ff0835
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
+  -fx-background-color: #ffffff;
+  -fx-text-fill: #ff0835;
+}
+.english-button:hover {
+  -fx-background-color: grey;
+  -fx-text-fill: #ff0835;
 }
 
 .history-button {
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
   -fx-background-color: #ffffff;
+  -fx-text-fill: #ffc800;
+}
+.history-button:hover {
+  -fx-background-color: #ffc800;
+  -fx-text-fill: #ffffff;
 }
 
 .science-button {
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
   -fx-background-color: #ffffff;
+  -fx-text-fill: #00ff6a;
+}
+.science-button:hover {
+  -fx-background-color: #00ff6a;
+  -fx-text-fill: #ffffff;
+}
+.color-rectangle {
+  -fx-fill: url("english3.png");
+}
+.box1 {
+  -fx-fill: url("english1.png");
+}
+.box2 {
+  -fx-fill: url("english2.png");
+}
+.Landing-buttons {
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
 }
