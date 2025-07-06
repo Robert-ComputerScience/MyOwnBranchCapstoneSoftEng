@@ -13,18 +13,19 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csc325_capstoneproject.StudyController">
    <children>
-      <Rectangle id="top-bar" arcHeight="5.0" arcWidth="5.0" fill="#e7e5ff" height="100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="top-bar" width="1200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="225.0" layoutX="818.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="222.0" />
+      <Rectangle id="top-bar" arcHeight="5.0" arcWidth="5.0" height="100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="top-bar" width="1200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="90.0" layoutX="10.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="90.0" />
       <ImageView fx:id="pfp" fitHeight="90.0" fitWidth="90.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/profile_symbol.png" />
          </image></ImageView>
-      <Label layoutX="110.0" layoutY="37.0" prefHeight="14.0" prefWidth="165.0" text="Grade Level:">
+      <Label layoutX="110.0" layoutY="37.0" prefHeight="14.0" prefWidth="165.0" text="Grade Level:" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="5.0" prefHeight="14.0" prefWidth="165.0" text="Username">
+      <Label fx:id="usernameLabel" layoutX="110.0" layoutY="5.0" prefHeight="14.0" prefWidth="165.0" text="Username" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="23.0" />
          </font>
@@ -59,16 +60,25 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="72.0" layoutX="685.0" layoutY="462.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="514.0" />
       <Button fx:id="praticeButton" layoutX="26.0" layoutY="707.0" mnemonicParsing="false" onAction="#practiceTest" prefHeight="72.0" prefWidth="210.0" text="PRACTICE" />
       <Button fx:id="testButton" layoutX="445.0" layoutY="707.0" mnemonicParsing="false" onAction="#test" prefHeight="72.0" prefWidth="210.0" text="TEST" />
-      <Label layoutX="828.0" layoutY="130.0" text="Your average grade on the past 10 math tests" textFill="WHITE">
+      <Label fx:id="averageGradeLabel" layoutX="741.0" layoutY="128.0" text="Your average grade on the past 10 math tests" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="12.0" />
+            <Font name="Bodoni MT" size="22.0" />
          </font>
       </Label>
-      <Label layoutX="794.0" layoutY="476.0" text="Past 10 math exams" textFill="WHITE">
+      <Label fx:id="past10ExamsLabel" layoutX="794.0" layoutY="476.0" text="Past 10 math exams" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="35.0" />
          </font>
       </Label>
       <ComboBox fx:id="questionNumberBox" layoutX="606.0" layoutY="116.0" onAction="#questionCountUpdate" prefHeight="26.0" prefWidth="57.0" />
+      <ImageView fx:id="percentageWheel" fitHeight="225.0" fitWidth="249.0" layoutX="831.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/math_wheels/math_wheel_0.png" />
+         </image></ImageView>
+      <Label fx:id="percentLabel" layoutX="927.0" layoutY="269.0" prefHeight="56.0" prefWidth="45.0" text="0%">
+         <font>
+            <Font name="Berlin Sans FB" size="29.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
