@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +31,18 @@ public class StudyController implements Initializable {
 
     @FXML
     protected ImageView pfp;
+
+    @FXML
+    protected Label past10ExamsLabel;
+
+    @FXML
+    protected Label usernameLabel;
+
+    @FXML
+    protected Label averageGradeLabel;
+
+    @FXML
+    protected Label percentLabel;
 
     @FXML
     protected Button mathButton;
@@ -71,6 +80,9 @@ public class StudyController implements Initializable {
     @FXML
     protected ComboBox<Integer> questionNumberBox;
 
+    @FXML
+    protected ImageView percentageWheel;
+
     public static Subject currentSubject;
 
     public static int currentGradeLevel;
@@ -86,6 +98,14 @@ public class StudyController implements Initializable {
     protected ObservableList<Test> history_tests = FXCollections.observableList(new LinkedList<>());
 
     protected ObservableList<Test> science_tests = FXCollections.observableList(new LinkedList<>());
+
+    protected int math_average;
+
+    protected int english_average;
+
+    protected int history_average;
+
+    protected int science_average;
 
     /**
      * Initializes the TableView and Percentage wheel on the main page. The default is math.
@@ -112,6 +132,12 @@ public class StudyController implements Initializable {
         tv_score.setCellValueFactory(new PropertyValueFactory<>("Score"));
         tv_count.setCellValueFactory(new PropertyValueFactory<>("questionCount"));
 
+        math_average = 0;
+        english_average = 0;
+        history_average = 0;
+        science_average = 0;
+
+
         tv.setItems(math_tests);
     }
 
@@ -125,6 +151,10 @@ public class StudyController implements Initializable {
         tv.setItems(math_tests);
         currentSubject = Subject.MATH;
 
+        averageGradeLabel.setText("Your average grade on the past 10 math tests");
+        past10ExamsLabel.setText("Past 10 Math Exams");
+        percentLabel.setText(math_average + "%");
+
         try {
 
             Scene scene = mathButton.getScene();
@@ -137,6 +167,9 @@ public class StudyController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        averageUpdated();
+
     }
 
     /**
@@ -148,6 +181,10 @@ public class StudyController implements Initializable {
     protected void englishMode() {
         tv.setItems(english_tests);
         currentSubject = Subject.ENGLISH;
+
+        averageGradeLabel.setText("Your average grade on the past 10 english tests");
+        past10ExamsLabel.setText("Past 10 English Exams");
+        percentLabel.setText(english_average + "%");
 
         try {
 
@@ -162,6 +199,8 @@ public class StudyController implements Initializable {
             e.printStackTrace();
         }
 
+        averageUpdated();
+
     }
 
     /**
@@ -173,6 +212,10 @@ public class StudyController implements Initializable {
     protected void historyMode() {
         tv.setItems(history_tests);
         currentSubject = Subject.HISTORY;
+
+        averageGradeLabel.setText("Your average grade on the past 10 history tests");
+        past10ExamsLabel.setText("Past 10 History Exams");
+        percentLabel.setText(history_average + "%");
 
         try {
             Scene scene = historyButton.getScene();
@@ -186,6 +229,8 @@ public class StudyController implements Initializable {
             e.printStackTrace();
         }
 
+        averageUpdated();
+
     }
 
     /**
@@ -198,6 +243,10 @@ public class StudyController implements Initializable {
         tv.setItems(science_tests);
         currentSubject = Subject.SCIENCE;
 
+        averageGradeLabel.setText("Your average grade on the past 10 science tests");
+        past10ExamsLabel.setText("Past 10 Science Exams");
+        percentLabel.setText(science_average + "%");
+
         try {
             Scene scene = scienceButton.getScene();
             Stage stage = (Stage) scene.getWindow();
@@ -209,6 +258,8 @@ public class StudyController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        averageUpdated();
 
     }
 
@@ -357,5 +408,26 @@ public class StudyController implements Initializable {
     @FXML
     protected void questionCountUpdate() {
         questionCount = questionNumberBox.getValue();
+    }
+
+    /**
+     * Updates the average wheel and text prompt with the correct color and percentage filled
+     * @since 7/5/2025
+     * @author Nathaniel Rivera
+     */
+    @FXML
+    protected void averageUpdated() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("/com/example/csc325_capstoneproject/images/");
+
+        switch(currentSubject) {
+            case MATH -> sb.append("math_wheels/math_wheel_").append(math_average).append(".png");
+            case ENGLISH -> sb.append("english_wheels/english_wheel_").append(english_average).append(".png");
+            case HISTORY -> sb.append("history_wheels/history_wheel_").append(history_average).append(".png");
+            case SCIENCE -> sb.append("science_wheels/science_wheel_").append(science_average).append(".png");
+        }
+
+        percentageWheel.setImage(new Image(Objects.requireNonNull(StudyController.class.getResourceAsStream(sb.toString()))));
     }
 }

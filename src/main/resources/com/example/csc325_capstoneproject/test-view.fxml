@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csc325_capstoneproject.TestController">
    <children>
@@ -19,5 +19,11 @@
       <Button fx:id="previousButton" layoutX="50.0" layoutY="620.0" mnemonicParsing="false" onAction="#previous" prefHeight="55.0" prefWidth="155.0" text="Previous" />
       <Button fx:id="nextButton" layoutX="522.0" layoutY="620.0" mnemonicParsing="false" onAction="#next" prefHeight="55.0" prefWidth="155.0" text="Next" />
       <Button fx:id="submitButton" layoutX="959.0" layoutY="620.0" mnemonicParsing="false" onAction="#submit" prefHeight="55.0" prefWidth="155.0" text="Submit" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="986.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Label fx:id="timerText" layoutX="1026.0" layoutY="27.0" text="00:00">
+         <font>
+            <Font name="Berlin Sans FB" size="46.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

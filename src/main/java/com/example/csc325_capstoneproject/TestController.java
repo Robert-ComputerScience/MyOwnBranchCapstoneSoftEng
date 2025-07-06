@@ -13,9 +13,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.sound.midi.SysexMessage;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * TestController is the class which controls the tests for the application.
+ * Both practice and timed test are directed to this page the only difference
+ * is if the timer activates or not.
+ * @since 7/2/2025
+ * @author Nathaniel Rivera
+ */
 public class TestController implements Initializable {
 
     @FXML
@@ -23,6 +31,9 @@ public class TestController implements Initializable {
 
     @FXML
     protected Label subjectLabel;
+
+    @FXML
+    protected Label timerText;
 
     @FXML
     protected Label gradeLabel;
@@ -60,7 +71,7 @@ public class TestController implements Initializable {
      * Initializes the test values and generates the test.
      * @param url URL
      * @param resourceBundle ResourceBundle
-     * @since 6/30/2025
+     * @since 7/2/2025
      * @author Nathaniel Rivera
      */
     @Override
@@ -110,8 +121,18 @@ public class TestController implements Initializable {
                         stage.close();
                         landingStage.show();
                     } catch(Exception _) { }*/
+                    try {
+                        timer();
+                    } catch (InterruptedException e) {
+                        System.out.println("failed");
+                    }
                 }
             }, 5000);
+            try {
+                timer();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -184,4 +205,54 @@ public class TestController implements Initializable {
             landingStage.show();
         } catch(Exception _) { }
     }
+
+    /**
+     * Method to start and move the timer through the application.
+     * @since 7/4/2025
+     * @author Nathaniel Rivera
+     */
+    protected void timer() throws InterruptedException {
+        Timer timer = new Timer();
+        /*
+        int min = 5;
+        int sec = 0;
+
+        setTimer(min, sec);
+
+        while(min != 0 && sec != 0) {
+
+            if(sec > 0) {
+                sec--;
+            } else if(min > 0 && sec == 0) {
+                min--;
+                sec = 59;
+            } else if(min == 0 && sec == 1) {
+                sec--;
+            }
+
+            wait(1000);
+            setTimer(min, sec);
+            System.out.println("timed");
+        }*/
+    }
+
+    /**
+     * Sets the timer to the newly updated time.
+     * @since 7/4/2025
+     * @author Nathaniel Rivera
+     */
+    protected void setTimer(int min, int sec) {
+        if(min >= 10) {
+            if(sec >= 10) {
+                timerText.setText(min + ":" + sec);
+            } else {
+                timerText.setText(min + ":0" + sec);
+            }
+        } else if(sec >= 10) {
+            timerText.setText("0" + min + ":" + sec);
+        } else {
+            timerText.setText("0" + min + ":0" + sec);
+        }
+    }
 }
+
