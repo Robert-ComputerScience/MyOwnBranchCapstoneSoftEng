@@ -1,7 +1,11 @@
 package com.example.csc325_capstoneproject;
 
+import com.example.csc325_capstoneproject.model.CurrentUser;
 import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +19,8 @@ import javafx.stage.Stage;
 
 import javax.sound.midi.SysexMessage;
 import java.net.URL;
+import java.time.Clock;
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -204,6 +210,7 @@ public class TestController implements Initializable {
             stage.close();
             landingStage.show();
         } catch(Exception _) { }
+        addTest();
     }
 
     /**
@@ -253,6 +260,35 @@ public class TestController implements Initializable {
         } else {
             timerText.setText("0" + min + ":0" + sec);
         }
+    }
+
+    /**
+     * Adds the current test to the firebase storage, if 10 tests exist for the current subject it will replace the oldest one.
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void addTest() {
+
+        StringBuilder sb = new StringBuilder();
+
+        Clock zoneClock = Clock.system(ZoneId.of("-05:00"));
+        sb.append(zoneClock.instant().toString(), 5, 7).append("/");
+        sb.append(zoneClock.instant().toString(), 8, 10).append("/");
+        sb.append(zoneClock.instant().toString(), 0, 4);
+        String time  = sb.toString();
+
+
+        DocumentReference docRef = StudyApplication.fstore.collection("Tests").document(UUID.randomUUID().toString());
+
+        Map<String, Object> tests = new HashMap<>();
+        tests.put("Subject", subject);
+        tests.put("Date", time);
+        tests.put("Score", 0);
+        tests.put("Questions", totalQuestions);
+        tests.put("User", CurrentUser.getCurrentUID());
+
+        //asynchronously write data
+        ApiFuture<WriteResult> result = docRef.set(tests);
     }
 }
 

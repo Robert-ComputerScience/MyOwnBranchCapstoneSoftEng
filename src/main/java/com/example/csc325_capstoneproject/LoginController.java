@@ -1,5 +1,6 @@
 package com.example.csc325_capstoneproject;
 
+import com.example.csc325_capstoneproject.model.CurrentUser;
 import com.example.csc325_capstoneproject.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -36,6 +37,8 @@ public class LoginController implements Initializable {
 
     @FXML
     protected TextField passwordField;
+
+    protected static boolean loginStatus = false;
 
     protected LinkedList<User> users = new LinkedList<>();
 
@@ -97,12 +100,48 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Logs the current user into the application,
+     * @since 6/28/2025
+     * @author Nathaniel Rivera
+     */
     @FXML
     protected void login() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        stage.close();
+        boolean canLogin;
+        User currUser = null;
+        String email = emailField.getText();
+        String password = passwordField.getText();
+
+        if (password.isEmpty() || email.isEmpty()) {
+            System.out.println("Error: One or more fields do not have inputs");
+            //errorLabel.setText("All fields must be filled."); // Print error to UI
+
+            // Highlight empty fields with a red border
+            if (password.isEmpty()) passwordField.setStyle("-fx-border-color: red;");
+            if (email.isEmpty()) emailField.setStyle("-fx-border-color: red;");
+            canLogin = false;
+        } else {
+            canLogin = true;
+
+            try {
+                User user = new User(StudyApplication.fauth.getUserByEmail(email).getDisplayName(), StudyApplication.fauth.getUserByEmail(email).getEmail(), StudyApplication.fauth.getUserByEmail(email).getUid());
+                CurrentUser.setCurrentUser(user);
+                loginStatus = true;
+                System.out.println("User successfully logged in");
+            } catch (FirebaseAuthException e) {
+                //errorLabel.setText("An account with this email does not exist"); // print error to UI
+            }
+        }
+
+        if(canLogin) {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+
+            stage.close();
+        } else {
+            //errorLabel.setText("Username, email, or password are incorrect."); // print error to UI
+        }
+
     }
 
     /**
@@ -143,5 +182,23 @@ public class LoginController implements Initializable {
     protected void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Static method that updates the users login status
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    public static void updateLoginStatus(boolean status) {
+        loginStatus = status;
+    }
+
+    /**
+     * Static method that returns the users login status.
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    public static boolean getLoginStatus() {
+        return loginStatus;
     }
 }

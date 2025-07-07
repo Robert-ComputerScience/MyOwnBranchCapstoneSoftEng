@@ -1,5 +1,6 @@
 package com.example.csc325_capstoneproject;
 
+import com.example.csc325_capstoneproject.model.CurrentUser;
 import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
 import javafx.collections.FXCollections;
@@ -116,6 +117,8 @@ public class StudyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        usernameLabel.setText(CurrentUser.getCurrentUsername());
 
         gradeLevelBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
         questionNumberBox.setItems(FXCollections.observableArrayList(10, 15, 20));
