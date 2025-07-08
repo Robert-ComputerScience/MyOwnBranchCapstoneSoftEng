@@ -145,7 +145,7 @@ public class StudyApplication extends Application {
                 AnchorPane loginRoot = new AnchorPane();
                 loginRoot.getChildren().add(fxmlLoader.load());
 
-                Scene scene = new Scene(loginRoot, 800, 600);
+                Scene scene = new Scene(loginRoot, 650, 380);
                 //loginStage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("splashscreen.css")).toExternalForm());
                 loginStage.setScene(scene);
                 loginStage.setResizable(false);
