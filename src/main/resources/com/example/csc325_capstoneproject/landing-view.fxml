@@ -37,16 +37,18 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="363.0" layoutX="685.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 0; -fx-arc-width: 0;" styleClass="box1" width="514.0" />
       <TableView fx:id="tv" layoutX="686.0" layoutY="538.0" prefHeight="261.0" prefWidth="514.0">
         <columns>
-          <TableColumn fx:id="tv_date" prefWidth="187.199951171875" text="Date Taken" />
-          <TableColumn fx:id="tv_subject" prefWidth="147.199951171875" text="Subject" />
-            <TableColumn fx:id="tv_score" prefWidth="45.5999755859375" text="Score" />
-            <TableColumn fx:id="tv_count" minWidth="0.0" prefWidth="133.5999755859375" text="Question Count" />
+            <TableColumn fx:id="tv_grade" prefWidth="79.2000732421875" text="Grade Level" />
+          <TableColumn fx:id="tv_subject" prefWidth="101.5999755859375" text="Subject" />
+          <TableColumn fx:id="tv_date" prefWidth="117.5999755859375" text="Date Taken" />
+            <TableColumn fx:id="tv_score" prefWidth="64.0" text="Score" />
+            <TableColumn fx:id="tv_count" minWidth="0.0" prefWidth="152.800048828125" text="Question Count" />
         </columns>
       </TableView>
       <Button fx:id="mathButton" layoutX="32.0" layoutY="207.0" mnemonicParsing="false" onAction="#mathMode" prefHeight="90.0" prefWidth="298.0" styleClass="math-button" text="MATH">
          <font>
             <Font name="Arial Rounded MT Bold" size="42.0" />
-         </font></Button>
+         </font>
+      </Button>
       <Button fx:id="englishButton" layoutX="32.0" layoutY="329.0" mnemonicParsing="false" onAction="#englishMode" prefHeight="90.0" prefWidth="298.0" styleClass="english-button" text="ENGLISH">
          <font>
             <Font name="Arial Rounded MT Bold" size="42.0" />
@@ -85,7 +87,7 @@
             <Font name="Bodoni MT" size="22.0" />
          </font>
       </Label>
-      <Label fx:id="past10ExamsLabel" layoutX="794.0" layoutY="476.0" text="Past 10 math exams" textFill="WHITE">
+      <Label fx:id="past10ExamsLabel" layoutX="794.0" layoutY="476.0" text="Past 10 Math exams" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="35.0" />
          </font>
