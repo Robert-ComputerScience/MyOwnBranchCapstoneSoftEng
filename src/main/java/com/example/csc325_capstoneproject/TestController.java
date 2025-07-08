@@ -5,6 +5,8 @@ import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,15 +15,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.sound.midi.SysexMessage;
 import java.net.URL;
 import java.time.Clock;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * TestController is the class which controls the tests for the application.
@@ -73,6 +74,12 @@ public class TestController implements Initializable {
 
     protected boolean isTimed;
 
+    protected int highestCount;
+
+    protected int lowestCountTest;
+
+    protected LinkedList<Test> tests = new LinkedList<Test>();
+
     /**
      * Initializes the test values and generates the test.
      * @param url URL
@@ -102,6 +109,13 @@ public class TestController implements Initializable {
         answers = new ArrayList<>();
         for(int i = 0; i < totalQuestions; i++) {
             answers.add(i, "");
+        }
+
+        switch(subject) {
+            case MATH -> retrieveMathTests();
+            case ENGLISH -> retrieveEnglishTests();
+            case HISTORY -> retrieveHistoryTests();
+            case SCIENCE -> retrieveScienceTests();
         }
 
         if(isTimed) {
@@ -193,6 +207,9 @@ public class TestController implements Initializable {
      */
     @FXML
     protected void submit() {
+
+        addTest();
+
         FXMLLoader fxmlLoader = new FXMLLoader(StudyApplication.class.getResource("landing-view.fxml"));
 
         Stage stage = (Stage) submitButton.getScene().getWindow();
@@ -210,7 +227,6 @@ public class TestController implements Initializable {
             stage.close();
             landingStage.show();
         } catch(Exception _) { }
-        addTest();
     }
 
     /**
@@ -280,15 +296,287 @@ public class TestController implements Initializable {
 
         DocumentReference docRef = StudyApplication.fstore.collection("Tests").document(UUID.randomUUID().toString());
 
-        Map<String, Object> tests = new HashMap<>();
-        tests.put("Subject", subject);
-        tests.put("Date", time);
-        tests.put("Score", 0);
-        tests.put("Questions", totalQuestions);
-        tests.put("User", CurrentUser.getCurrentUID());
+        Map<String, Object> new_tests = new HashMap<>();
+        new_tests.put("Subject", subject);
+        new_tests.put("Date", time);
+        new_tests.put("Score", 0);
+        new_tests.put("Questions", totalQuestions);
+        new_tests.put("Grade", gradeLevel);
+        new_tests.put("Count", highestCount + 1);
+        new_tests.put("User", CurrentUser.getCurrentUID());
 
         //asynchronously write data
-        ApiFuture<WriteResult> result = docRef.set(tests);
+        ApiFuture<WriteResult> result = docRef.set(new_tests);
+
+        if(highestCount >= 10) {
+            Test test = tests.get(lowestCountTest);
+
+            //asynchronously retrieve all documents
+            ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents;
+            try {
+                documents = future.get().getDocuments();
+                switch(subject) {
+                    case MATH -> { if (!documents.isEmpty()) {
+                        for (QueryDocumentSnapshot document : documents) {
+
+                            if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("MATH") && Integer.parseInt(document.getData().get("Count").toString()) == test.getCount()) {
+                                DocumentReference docRefDelete = StudyApplication.fstore.collection("Tests").document(document.getId());
+                                docRefDelete.delete();
+                                System.out.println("pass");
+                            } else {
+                                System.out.println("fail");
+                            }
+                        }
+
+                    } else {
+                        System.out.println("No data");
+                    } }
+                    case ENGLISH -> { if (!documents.isEmpty()) {
+                        for (QueryDocumentSnapshot document : documents) {
+
+                            if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("ENGLISH") && Integer.parseInt(document.getData().get("Count").toString()) == test.getCount()) {
+                                DocumentReference docRefDelete = StudyApplication.fstore.collection("Tests").document(document.getId());
+                                docRefDelete.delete();
+                                System.out.println("pass");
+                            } else {
+                                System.out.println("fail");
+                            }
+                        }
+
+                    } else {
+                        System.out.println("No data");
+                    }}
+                    case HISTORY -> {if (!documents.isEmpty()) {
+                        for (QueryDocumentSnapshot document : documents) {
+
+                            if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("HISTORY") && Integer.parseInt(document.getData().get("Count").toString()) == test.getCount()) {
+                                DocumentReference docRefDelete = StudyApplication.fstore.collection("Tests").document(document.getId());
+                                docRefDelete.delete();
+                                System.out.println("pass");
+                            } else {
+                                System.out.println("fail");
+                            }
+                        }
+
+                    } else {
+                        System.out.println("No data");
+                    }}
+                    case SCIENCE -> {if (!documents.isEmpty()) {
+                        for (QueryDocumentSnapshot document : documents) {
+
+                            if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("SCIENCE") && Integer.parseInt(document.getData().get("Count").toString()) == test.getCount()) {
+                                DocumentReference docRefDelete = StudyApplication.fstore.collection("Tests").document(document.getId());
+                                docRefDelete.delete();
+                                System.out.println("pass");
+                            } else {
+                                System.out.println("fail");
+                            }
+                        }
+
+                    } else {
+                        System.out.println("No data");
+                    }}
+                }
+
+            } catch (InterruptedException | ExecutionException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
+
+    /**
+     * Gets all the math tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveMathTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (!documents.isEmpty()) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("MATH")) {
+                        Test test = new Test(Subject.MATH, Integer.parseInt(String.valueOf(document.getData().get("Questions"))), Integer.parseInt(String.valueOf(document.getData().get("Score"))), (String) document.getData().get("Date"), Integer.parseInt(String.valueOf(document.getData().get("Grade"))), Integer.parseInt(String.valueOf(document.getData().get("Count"))));
+                        tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+
+        highestCount = 0;
+
+        int lowestCount = Integer.MAX_VALUE;
+
+        for (int i = 0; i < tests.size(); i++) {
+            if (tests.get(i).getCount() > highestCount) {
+                highestCount = tests.get(i).getCount();
+            }
+            if(tests.get(i).getCount() < lowestCount) {
+                lowestCount = tests.get(i).getCount();
+                lowestCountTest = i;
+            }
+        }
+    }
+
+    /**
+     * Gets all the english tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveEnglishTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (!documents.isEmpty()) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("ENGLISH")) {
+                        Test test = new Test(Subject.ENGLISH, Integer.parseInt(String.valueOf(document.getData().get("Questions"))), Integer.parseInt(String.valueOf(document.getData().get("Score"))), (String) document.getData().get("Date"), Integer.parseInt(String.valueOf(document.getData().get("Grade"))), Integer.parseInt(String.valueOf(document.getData().get("Count"))));
+                        tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+
+        highestCount = 0;
+
+        int lowestCount = Integer.MAX_VALUE;
+
+        for (int i = 0; i < tests.size(); i++) {
+            if (tests.get(i).getCount() > highestCount) {
+                highestCount = tests.get(i).getCount();
+            }
+            if(tests.get(i).getCount() < lowestCount) {
+                lowestCount = tests.get(i).getCount();
+                lowestCountTest = i;
+            }
+        }
+    }
+
+    /**
+     * Gets all the history tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveHistoryTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (!documents.isEmpty()) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("HISTORY")) {
+                        Test test = new Test(Subject.HISTORY, Integer.parseInt(String.valueOf(document.getData().get("Questions"))), Integer.parseInt(String.valueOf(document.getData().get("Score"))), (String) document.getData().get("Date"), Integer.parseInt(String.valueOf(document.getData().get("Grade"))), Integer.parseInt(String.valueOf(document.getData().get("Count"))));
+                        tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+
+        highestCount = 0;
+
+        int lowestCount = Integer.MAX_VALUE;
+
+        for (int i = 0; i < tests.size(); i++) {
+            if (tests.get(i).getCount() > highestCount) {
+                highestCount = tests.get(i).getCount();
+            }
+            if(tests.get(i).getCount() < lowestCount) {
+                lowestCount = tests.get(i).getCount();
+                lowestCountTest = i;
+            }
+        }
+    }
+
+    /**
+     * Gets all the science tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveScienceTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (!documents.isEmpty()) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("SCIENCE")) {
+                        Test test = new Test(Subject.SCIENCE, Integer.parseInt(String.valueOf(document.getData().get("Questions"))), Integer.parseInt(String.valueOf(document.getData().get("Score"))), (String) document.getData().get("Date"), Integer.parseInt(String.valueOf(document.getData().get("Grade"))), Integer.parseInt(String.valueOf(document.getData().get("Count"))));
+                        tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+
+        highestCount = 0;
+
+        int lowestCount = Integer.MAX_VALUE;
+
+        for (int i = 0; i < tests.size(); i++) {
+            if (tests.get(i).getCount() > highestCount) {
+                highestCount = tests.get(i).getCount();
+            }
+            if(tests.get(i).getCount() < lowestCount) {
+                lowestCount = tests.get(i).getCount();
+                lowestCountTest = i;
+            }
+        }
+    }
+
 }
 

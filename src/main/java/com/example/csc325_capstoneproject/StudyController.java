@@ -3,6 +3,9 @@ package com.example.csc325_capstoneproject;
 import com.example.csc325_capstoneproject.model.CurrentUser;
 import com.example.csc325_capstoneproject.model.Subject;
 import com.example.csc325_capstoneproject.model.Test;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,8 +23,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Controller class which controls the actions for the landing page of the application.
@@ -70,10 +75,7 @@ public class StudyController implements Initializable {
     protected TableColumn<Test, String> tv_subject, tv_date;
 
     @FXML
-    protected TableColumn<Test, Double> tv_score;
-
-    @FXML
-    protected TableColumn<Test, Integer> tv_count;
+    protected TableColumn<Test, Integer> tv_score, tv_count, tv_grade;
 
     @FXML
     protected ComboBox<Integer> gradeLevelBox;
@@ -127,9 +129,12 @@ public class StudyController implements Initializable {
         currentGradeLevel = 1;
         questionCount = 10;
 
-        Test test = new Test(Subject.MATH, 20, 10, "6/30/2025");
-        math_tests.add(test);
+        retrieveMathTests();
+        retrieveEnglishTests();
+        retrieveHistoryTests();
+        retrieveScienceTests();
 
+        tv_grade.setCellValueFactory(new PropertyValueFactory<>("gradeLevel"));
         tv_subject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         tv_date.setCellValueFactory(new PropertyValueFactory<>("DateTaken"));
         tv_score.setCellValueFactory(new PropertyValueFactory<>("Score"));
@@ -432,5 +437,140 @@ public class StudyController implements Initializable {
         }
 
         percentageWheel.setImage(new Image(Objects.requireNonNull(StudyController.class.getResourceAsStream(sb.toString()))));
+    }
+
+    /**
+     * Gets all the math tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveMathTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (documents.size() > 0) {
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("MATH")) {
+                        Test test = new Test(Subject.MATH, Integer.parseInt(String.valueOf(document.getData().get("Questions"))), Integer.parseInt(String.valueOf(document.getData().get("Score"))), (String) document.getData().get("Date"), Integer.parseInt(String.valueOf(document.getData().get("Grade"))));
+                        math_tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets all the english tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveEnglishTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (documents.size() > 0) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("ENGLISH")) {
+                        Test test = new Test(Subject.ENGLISH, Integer.parseInt((String) document.getData().get("Questions")), Integer.parseInt((String) document.getData().get("Score")), (String) document.getData().get("Date"), Integer.parseInt((String) document.getData().get("Grade")));
+                        english_tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets all the history tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveHistoryTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (documents.size() > 0) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("HISTORY")) {
+                        Test test = new Test(Subject.HISTORY, Integer.parseInt((String) document.getData().get("Questions")), Integer.parseInt((String) document.getData().get("Score")), (String) document.getData().get("Date"), Integer.parseInt((String) document.getData().get("Grade")));
+                        history_tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets all the science tests and places them in the List
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    protected void retrieveScienceTests() {
+
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = StudyApplication.fstore.collection("Tests").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
+        try {
+
+            documents = future.get().getDocuments();
+
+            if (documents.size() > 0) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    if(document.getData().get("User").equals(CurrentUser.getCurrentUID()) && document.getData().get("Subject").equals("SCIENCE")) {
+                        Test test = new Test(Subject.SCIENCE, Integer.parseInt((String) document.getData().get("Questions")), Integer.parseInt((String) document.getData().get("Score")), (String) document.getData().get("Date"), Integer.parseInt((String) document.getData().get("Grade")));
+                        science_tests.add(test);
+                    }
+                }
+
+            } else {
+                System.out.println("No data");
+            }
+
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
     }
 }

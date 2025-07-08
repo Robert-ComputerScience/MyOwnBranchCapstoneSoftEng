@@ -23,9 +23,17 @@ public class Test {
      */
     private String date_taken;
     /**
-     * A double storing the score of the test.
+     * An int which stores the grade level of the user.
      */
-    private final double score;
+    private int grade_level;
+    /**
+     * An int storing the score of the test.
+     */
+    private final int score;
+    /**
+     * An int storing a count of how many test the child has taken for the given subject
+     */
+    private int count;
 
     /**
      * Default constructor for the Test class.
@@ -46,15 +54,38 @@ public class Test {
      * @param question_count The amount of questions on the test.
      * @param num_correct The number of questions the user got correct on the test.
      * @param date_taken The date the user took the test.
+     * @param grade_level THe grade level of the test.
      * @since 6/18/2025
      * @author Nathaniel Rivera
      */
-    public Test(Subject subject, int question_count, int num_correct, String date_taken) {
+    public Test(Subject subject, int question_count, int num_correct, String date_taken, int grade_level) {
         this.subject = subject;
         this.question_count = question_count;
         this.num_correct = num_correct;
         this.date_taken = date_taken;
+        this.grade_level = grade_level;
         this.score = getScore();
+    }
+
+    /**
+     * Parameterized constructor for the Test class with count.
+     * @param subject The subject of the test.
+     * @param question_count The amount of questions on the test.
+     * @param num_correct The number of questions the user got correct on the test.
+     * @param date_taken The date the user took the test.
+     * @param grade_level THe grade level of the test.
+     * @param count The amount of the tests the user has taken on the specific subject
+     * @since 6/18/2025
+     * @author Nathaniel Rivera
+     */
+    public Test(Subject subject, int question_count, int num_correct, String date_taken, int grade_level, int count) {
+        this.subject = subject;
+        this.question_count = question_count;
+        this.num_correct = num_correct;
+        this.date_taken = date_taken;
+        this.grade_level = grade_level;
+        this.score = getScore();
+        this.count = count;
     }
 
     /**
@@ -142,9 +173,37 @@ public class Test {
      * The String returned will have at most one decimal place.
      * @return The score of the test in the form of a string.
      */
-    public double getScore() {
-        double percent = ((double) num_correct / (double) question_count) * 100;
-        percent = (double) ((int) (percent * 100)) /100;
-        return percent;
+    public int getScore() {
+        return num_correct / question_count * 100;
+    }
+
+    /**
+     * Getter method for Grade Level.
+     * @return the grade_level for the Test.
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    public int getGradeLevel() {
+        return grade_level;
+    }
+
+    /**
+     * Setter method for grade_level.
+     * @param grade_level The grade_level of the User.
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    public void setGradeLevel(int grade_level) {
+        this.grade_level = grade_level;
+    }
+
+    /**
+     * Getter method for count.
+     * @return the count for the Test
+     * @since 7/7/2025
+     * @author Nathaniel Rivera
+     */
+    public int getCount() {
+        return count;
     }
 }
