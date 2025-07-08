@@ -145,6 +145,7 @@ public class StudyController implements Initializable {
         history_average = 0;
         science_average = 0;
 
+        averageUpdated();
 
         tv.setItems(math_tests);
     }
@@ -427,13 +428,13 @@ public class StudyController implements Initializable {
     protected void averageUpdated() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("/com/example/csc325_capstoneproject/images/");
+        sb.append("/com/example/csc325_capstoneproject/images/pinwheels/wheel_");
 
         switch(currentSubject) {
-            case MATH -> sb.append("math_wheels/math_wheel_").append(math_average).append(".png");
-            case ENGLISH -> sb.append("english_wheels/english_wheel_").append(english_average).append(".png");
-            case HISTORY -> sb.append("history_wheels/history_wheel_").append(history_average).append(".png");
-            case SCIENCE -> sb.append("science_wheels/science_wheel_").append(science_average).append(".png");
+            case MATH -> sb.append(math_average).append(".png");
+            case ENGLISH -> sb.append(english_average).append(".png");
+            case HISTORY -> sb.append(history_average).append(".png");
+            case SCIENCE -> sb.append(science_average).append(".png");
         }
 
         percentageWheel.setImage(new Image(Objects.requireNonNull(StudyController.class.getResourceAsStream(sb.toString()))));
