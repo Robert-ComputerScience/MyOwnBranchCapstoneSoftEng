@@ -16,7 +16,7 @@ import java.util.List;
 public class AIQuestionService {
 
     // ⚠️ IMPORTANT: Replace with your actual API key
-    private static final String API_KEY = "AIzaSyD3Iuopbn9aWchlN1tnV3YOZa_c_if4C58";
+    private static final String API_KEY = "";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" + API_KEY;
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
