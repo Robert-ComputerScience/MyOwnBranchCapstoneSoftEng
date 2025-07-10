@@ -12,10 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -33,6 +32,12 @@ import java.util.concurrent.ExecutionException;
  */
 public class TestController implements Initializable {
 
+    public VBox optionsContainer;
+    public RadioButton option1;
+    public ToggleGroup optionsGroup;
+    public RadioButton option2;
+    public RadioButton option3;
+    public RadioButton option4;
     @FXML
     protected Label numQuestionsLabel;
 
